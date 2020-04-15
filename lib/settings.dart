@@ -31,7 +31,15 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
 		appBar: AppBar(
-			title: Text("NIE"),
+			iconTheme: IconThemeData(
+				color: AccentColor
+			),
+			title: Text(
+				title,
+				style: TextStyle(
+					color: AccentColor,
+				),
+			),
 			backgroundColor: AppColor,
 		),
 		body: SingleChildScrollView(
