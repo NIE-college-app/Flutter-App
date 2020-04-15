@@ -22,8 +22,12 @@ var AccentColors = [
 	Colors.black38
 ];
 
+var svgName = 'assets/svg/sun.svg';
+
 var navcolors = Colors.white;
 
 var title = 'NIE';
+
+var temp = '';
 
 Widget body = Allfeed();

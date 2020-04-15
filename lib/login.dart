@@ -4,6 +4,7 @@ import 'package:nie/globalvariables.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
+import 'package:nie/Weather.dart';
 
 
 class Login extends StatefulWidget {
@@ -15,11 +16,12 @@ class _LoginState extends State<Login> {
 
 	void nav(index) {
 		setState(() {
+			Getweather();
 			if(index == 0) {
-				body = Allfeed();
+				body = Colfeed();
 			}
 			else if(index == 1) {
-				body = Colfeed();
+				body = Allfeed();
 			}
 			else if(index == 2) {
 				body = Options();
@@ -57,6 +59,7 @@ class _LoginState extends State<Login> {
 				Icon(Icons.line_style, size: 30, color: AccentColor),
 			],
 			onTap: (index) => nav(index),
+			animationCurve: Curves.fastLinearToSlowEaseIn,
 		),
 	);
   }
