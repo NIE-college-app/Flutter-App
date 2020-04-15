@@ -26,4 +26,21 @@ var navcolors = Colors.white;
 
 var title = 'NIE';
 
+Map<String,dynamic> data={
+	"displayName":"Iresh",
+	"email":"randomain@mail.com",
+	"USN":"4NI19CS053",
+	'contact':"9412365372",
+	"Semester":"3",
+	"Branch":"CSE",
+	"Section":"B",
+	"photoUrl":"https://picsum.photos/250?image=9",
+	"Groups":[
+		"CSE",
+		"Sem_3",
+		"Section_B",
+		"College"
+	]
+};
+
 Widget body = Allfeed();
