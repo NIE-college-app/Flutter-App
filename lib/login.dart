@@ -33,7 +33,12 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
 		appBar: AppBar(
-			title: Text(title),
+			title: Text(
+				title,
+				style: TextStyle(
+					color: AccentColor,
+				),
+			),
 			backgroundColor: AppColor,
 			actions: <Widget>[
 				Padding(
