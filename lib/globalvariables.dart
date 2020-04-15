@@ -30,7 +30,7 @@ var navcolors = Colors.white;
 var title = 'NIE';
 
 Map<String,dynamic> data={
-	"displayName":"Iresh",
+	"displayName":"Uttkarsh Singh",
 	"email":"randomain@mail.com",
 	"USN":"4NI19CS053",
 	'contact':"9412365372",

@@ -22,7 +22,7 @@ class _ColfeedState extends State<Colfeed> {
 
     return RefreshIndicator(
 		displacement: 30.0,
-		onRefresh: () {},
+		onRefresh: (){},
 		child:SingleChildScrollView(
 			child: Column(
 				mainAxisSize: MainAxisSize.max,
