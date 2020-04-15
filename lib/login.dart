@@ -29,6 +29,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+		var colorr = Theme.of(context).iconTheme;
     return Scaffold(
 		appBar: AppBar(
 			title: Text(title),
@@ -37,23 +38,23 @@ class _LoginState extends State<Login> {
 				Padding(
 					padding: EdgeInsets.all(5),
 					child: CircleAvatar(
+						backgroundColor: Colors.white,
 						backgroundImage: AssetImage(
-							"assets/NIE-Mysore-Logo.png"
+							"assets/images/logo.png",
 						),
-						foregroundColor: Colors.red,
 					),
 				)
 			],
 		),
 		body: body,
 		bottomNavigationBar: CurvedNavigationBar(
-			backgroundColor: Colors.white,
+			backgroundColor: Theme.of(context).iconTheme.color,
 			color: AppColor,
 			buttonBackgroundColor: AppColor,
 			items: <Widget>[
-				Icon(Icons.school, size: 30, color: Colors.white,),
-				Icon(Icons.group, size: 30, color: Colors.white,),
-				Icon(Icons.line_style, size: 30, color: Colors.white,),
+				Icon(Icons.school, size: 30, color: AccentColor,),
+				Icon(Icons.group, size: 30, color: AccentColor),
+				Icon(Icons.line_style, size: 30, color: AccentColor),
 			],
 			onTap: (index) => nav(index),
 		),
