@@ -3,6 +3,7 @@ import 'package:nie/Allfeed.dart';
 
 var AppColor = Appcolors[4];
 
+bool dnd = false;
 
 var Appcolors = [
 	Colors.pinkAccent[400],

@@ -9,7 +9,7 @@ Future Getweather() async {
 	http.Response response = await http.get("http://api.openweathermap.org/data/2.5/weather?q=Mysore&appid=a6d1ab49148702f56599f1701143e91b");
 
 	var weather = jsonDecode(response.body);
-	temp = (weather["main"]["temp"] -273).toString() + "℃" ;
+	temp = (weather["main"]["temp"] -273).toStringAsFixed(2) + "℃" ;
 
 	if(weather['weather'][0]['main'].toString() == "Clear") {
 		svgName = 'assets/svg/sun.svg';
