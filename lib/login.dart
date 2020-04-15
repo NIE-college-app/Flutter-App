@@ -38,6 +38,7 @@ class _LoginState extends State<Login> {
 				Padding(
 					padding: EdgeInsets.all(5),
 					child: CircleAvatar(
+						backgroundColor: Colors.white,
 						backgroundImage: AssetImage(
 							"assets/images/logo.png"
 						),
