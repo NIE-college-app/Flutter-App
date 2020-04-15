@@ -4,6 +4,7 @@ import 'package:nie/globalvariables.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
+import 'package:nie/Weather.dart';
 
 
 class Login extends StatefulWidget {
@@ -15,11 +16,12 @@ class _LoginState extends State<Login> {
 
 	void nav(index) {
 		setState(() {
+			Getweather();
 			if(index == 0) {
-				body = Allfeed();
+				body = Colfeed();
 			}
 			else if(index == 1) {
-				body = Colfeed();
+				body = Allfeed();
 			}
 			else if(index == 2) {
 				body = Options();
@@ -29,7 +31,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-		var colorr = Theme.of(context).iconTheme;
     return Scaffold(
 		appBar: AppBar(
 			title: Text(title),
@@ -37,12 +38,15 @@ class _LoginState extends State<Login> {
 			actions: <Widget>[
 				Padding(
 					padding: EdgeInsets.all(5),
-					child: CircleAvatar(
-						backgroundColor: Colors.white,
-						backgroundImage: AssetImage(
-							"assets/images/logo.png",
+					child: GestureDetector(
+						child: CircleAvatar(
+							backgroundColor: Colors.white,
+							backgroundImage: AssetImage(
+								"assets/images/logo.png",
+							),
 						),
-					),
+						onTap: () =>  Navigator.pushNamed(context, '/settings'),
+					)
 				)
 			],
 		),
@@ -57,6 +61,7 @@ class _LoginState extends State<Login> {
 				Icon(Icons.line_style, size: 30, color: AccentColor),
 			],
 			onTap: (index) => nav(index),
+			animationCurve: Curves.fastLinearToSlowEaseIn,
 		),
 	);
   }

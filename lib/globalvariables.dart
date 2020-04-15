@@ -3,6 +3,7 @@ import 'package:nie/Allfeed.dart';
 
 var AppColor = Appcolors[4];
 
+bool dnd = false;
 
 var Appcolors = [
 	Colors.pinkAccent[400],
@@ -21,6 +22,8 @@ var AccentColors = [
 	Colors.green,
 	Colors.black38
 ];
+
+var svgName = 'assets/svg/sun.svg';
 
 var navcolors = Colors.white;
 
@@ -42,5 +45,6 @@ Map<String,dynamic> data={
 		"College"
 	]
 };
+var temp = '';
 
 Widget body = Allfeed();
