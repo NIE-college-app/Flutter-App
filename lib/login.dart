@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
 					child: CircleAvatar(
 						backgroundColor: Colors.white,
 						backgroundImage: AssetImage(
-							"assets/images/logo.png"
+							"assets/images/logo.png",
 						),
 					),
 				)

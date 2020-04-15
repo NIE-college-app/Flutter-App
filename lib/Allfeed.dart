@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:getflutter/getflutter.dart';
+import 'package:nie/Card.dart';
 
 class Allfeed extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _AllfeedState extends State<Allfeed> {
 						mainAxisAlignment: MainAxisAlignment.start,
 						children: <Widget>[
 							Text(
-								"Allfeed",
+								"Feed",
 								style: TextStyle(
 									fontSize: 70.0,
 									fontWeight: FontWeight.w200
@@ -37,35 +37,10 @@ class _AllfeedState extends State<Allfeed> {
 								),
 								textAlign: TextAlign.center,
 							),
+							FeedCard(),
 						],
 					)
 				),
-				Padding(
-					padding: EdgeInsets.all(0),
-					child: GFCard(
-						boxFit: BoxFit.cover,
-						image: Image.asset('your asset image'),
-						title: GFListTile(
-							avatar:GFAvatar(),
-							title: Text('Card Title'),
-							icon: OutlineButton.icon(onPressed: () => print('liked'),
-								icon: Icon(CupertinoIcons.heart),
-								label: Text("Like")
-							)
-						),
-						content:Text( "Some quick example text to build on the card"),
-						buttonBar: GFButtonBar(
-							children: <Widget>[
-								FlatButton(
-									onPressed: () {},
-									child: Text('Read More'),
-								),
-							],
-						),
-						elevation: 5,
-					),
-				)
-
 			],
 		)
 	);
