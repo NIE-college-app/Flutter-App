@@ -31,7 +31,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-		var colorr = Theme.of(context).iconTheme;
     return Scaffold(
 		appBar: AppBar(
 			title: Text(title),
@@ -39,12 +38,15 @@ class _LoginState extends State<Login> {
 			actions: <Widget>[
 				Padding(
 					padding: EdgeInsets.all(5),
-					child: CircleAvatar(
-						backgroundColor: Colors.white,
-						backgroundImage: AssetImage(
-							"assets/images/logo.png",
+					child: GestureDetector(
+						child: CircleAvatar(
+							backgroundColor: Colors.white,
+							backgroundImage: AssetImage(
+								"assets/images/logo.png",
+							),
 						),
-					),
+						onTap: () =>  Navigator.pushNamed(context, '/settings'),
+					)
 				)
 			],
 		),
