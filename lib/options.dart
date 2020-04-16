@@ -17,7 +17,7 @@ class _OptionsState extends State<Options> {
       displacement: 30.0,
       onRefresh: (){},
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(0),
         child: Container(
           child: SingleChildScrollView(
             padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height*0.05, 0, MediaQuery.of(context).size.height*0.07),

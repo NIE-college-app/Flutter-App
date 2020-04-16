@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:nie/globalvariables.dart';
+import 'package:nie/post.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
@@ -26,6 +27,9 @@ class _LoginState extends State<Login> {
 			}
 			else if(index == 2) {
 				body = Options();
+			}
+			else if(index == 3) {
+				body = Post();
 			}
 		});
 	}
