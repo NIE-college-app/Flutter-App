@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1902108043",
+    "firebase_url": "https://nie-college-app.firebaseio.com",
+    "project_id": "nie-college-app",
+    "storage_bucket": "nie-college-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1902108043:android:2c3a04cfb97c47c739638e",
+        "android_client_info": {
+          "package_name": "com.iresharma.nie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1902108043-ijr6jdkipqmnh57kpdec4kndqtpev6ot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iresharma.nie",
+            "certificate_hash": "5829c577bbc07b2f64c37b4b36219e5ae0a3832f"
+          }
+        },
+        {
+          "client_id": "1902108043-crbr7j2s9v58o8qasqbdus8ao8mvvjl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQQZME9nPVWKkRwFGVBTq_DrMmrFzu0As"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1902108043-crbr7j2s9v58o8qasqbdus8ao8mvvjl7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1902108043-ostdtst6mtkcd5g692l49pvk434h0iuu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.iresharma.nie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
