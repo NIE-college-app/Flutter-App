@@ -116,7 +116,7 @@ class _OptionsState extends State<Options> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()=>debugPrint("GOING TO TIMETABLE"),
+                  onTap: ()=>Navigator.pushNamed(context,'/timetable'),
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)
