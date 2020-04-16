@@ -157,6 +157,27 @@ class _OptionsState extends State<Options> {
                     ),
                   ),
                 ),
+                GestureDetector(
+                  onTap: ()=>Navigator.pushNamed(context,'/timetable'),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                    ),
+                    elevation: 20,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GFListTile(
+                        titleText: "Faculty Info",
+                        subtitleText: "Get to know about your faculty here",
+                        icon: Icon(
+                          Icons.perm_contact_calendar,
+                          color: AccentColor,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
               ],
             ),

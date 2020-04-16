@@ -13,6 +13,11 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
 
 	TextEditingController controller = new TextEditingController();
+	TextEditingController Titlecontroller = new TextEditingController();
+	bool event = false;
+	DateTime date;
+	DateTime tempdate;
+
 	String dropdownValue;
   @override
   Widget build(BuildContext context) {
@@ -101,7 +106,7 @@ class _PostState extends State<Post> {
 																		onPressed: () {
 																			setState(() {
 																				source = ImageSource.camera;
-																				Icon picker = Icon(
+																				picker = Icon(
 																					CupertinoIcons.photo_camera,
 																					size: 90,
 																				);
@@ -124,11 +129,11 @@ class _PostState extends State<Post> {
 																		onPressed: () {
 																			setState(() {
 																				source = ImageSource.gallery;
-																				Icon picker = Icon(
-																					CupertinoIcons.photo_camera,
+																				picker = Icon(
+																					CupertinoIcons.collections,
 																					size: 90,
 																				);
-																				textpicker = 'Take a picture';
+																				textpicker = 'Select a picture';
 																			});
 																			Navigator.of(context).pushNamed('/imageUpload');
 																		},
@@ -147,7 +152,7 @@ class _PostState extends State<Post> {
 								Padding(
 									padding: EdgeInsets.all(10),
 									child: TextField(
-										controller: controller,
+										controller: Titlecontroller,
 										maxLines: null,
 										keyboardType: TextInputType.multiline,
 										style: TextStyle(
@@ -182,6 +187,58 @@ class _PostState extends State<Post> {
 											),
 											hintText: 'Write your post\n\n\n\n\n\n'
 										),
+									),
+								),
+								Padding(
+									padding: EdgeInsets.all(10),
+									child: Row(
+										mainAxisAlignment: MainAxisAlignment.spaceBetween,
+										children: <Widget>[
+											Text(
+												"Event",
+												style: TextStyle(
+													fontSize: 25
+												),
+											),
+											CupertinoSwitch(
+												value: event,
+												onChanged: (value) {
+													if(value) {
+														showCupertinoDialog(
+															context: context,
+															builder: (context) => CupertinoAlertDialog(
+																title: Text("Date \& Time of Event "),
+																actions: <Widget>[
+																	Column(
+																		mainAxisAlignment: MainAxisAlignment.center,
+																		children: <Widget>[
+																			SizedBox(
+																				height: 300,
+																				width: MediaQuery.of(context).size.width * 0.9,
+																				child: CupertinoDatePicker(
+																					mode: CupertinoDatePickerMode.dateAndTime,
+																					onDateTimeChanged: (dateTime) {
+																						tempdate = dateTime;
+																					},
+																				),
+																			),
+																			CupertinoDialogAction(
+																				child: Text('Close'),
+																				onPressed: () {
+																					event = value;
+																					date = tempdate;
+																					print(date);
+																					Navigator.of(context).pop();
+																				}
+																			)
+																		],
+																	)
+																],
+															));
+													}
+												},
+											)
+										],
 									),
 								)
 							],

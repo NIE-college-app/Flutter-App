@@ -22,10 +22,12 @@ class ImageCapture extends StatefulWidget {
 class _ImageCaptureState extends State<ImageCapture> {
 
   File _imageFile;
+  bool _isimg = false;
 
   void _clear() {
     setState(() {
       _imageFile = null;
+      _isimg = false;
     });
   }
 
@@ -33,11 +35,13 @@ class _ImageCaptureState extends State<ImageCapture> {
     File selected = await ImagePicker.pickImage(source: source);
     setState(() {
       _imageFile = selected;
+      _isimg = true;
     });
   }
 
   Future<void> _cropImage() async {
     File cropped = await ImageCropper.cropImage(
+      sourcePath: _imageFile.path,
       androidUiSettings: AndroidUiSettings(
           toolbarTitle: 'Adjust Image',
           toolbarColor: AppColor,
@@ -69,17 +73,43 @@ class _ImageCaptureState extends State<ImageCapture> {
         ),
         backgroundColor: AppColor,
       ),
-      body: Center(
-        child: CupertinoButton(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              picker,
-              Text(textpicker)
-            ],
-          ),
-          onPressed: _pickImage,
-        )
+      body: _isimg == true ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.file(_imageFile),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    OutlineButton.icon
+                      (onPressed: _cropImage,
+                        icon: Icon(Icons.crop),
+                        label: Text('Crop')
+                    ),
+                    OutlineButton.icon(
+                        onPressed: _clear,
+                        icon: Icon(CupertinoIcons.clear),
+                        label: Text("Clear")
+                    )
+                  ],
+                )
+              ],
+            ) :
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CupertinoButton(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        picker,
+                        Text(textpicker)
+                      ],
+                    ),
+                    onPressed: _pickImage,
+                  ),
+          ],
+        ),
       )
     );
   }
