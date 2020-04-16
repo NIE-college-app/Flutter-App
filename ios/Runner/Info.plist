@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses library to upload photos, to the feed</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -41,9 +43,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app uses location to forecast the weather.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>This app uses location to forecast the weather.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses location to forecast the weather.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app usages camera to click photos and upload them to the feed</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Record audio for the video</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app uses location to forecast the weather.</string>
 </dict>
 </plist>
