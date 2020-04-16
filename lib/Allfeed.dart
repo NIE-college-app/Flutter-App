@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nie/Card.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:getflutter/getflutter.dart';
 
 class Allfeed extends StatefulWidget {
   @override
@@ -10,12 +11,23 @@ class Allfeed extends StatefulWidget {
 }
 
 class _AllfeedState extends State<Allfeed> {
-  @override
-  Widget build(BuildContext context) {
 
-	  final Widget svg = SvgPicture.asset(
-		  svgName,
-	  );
+	final List<String> imageList = [
+		"https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
+		"https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
+		"https://cdn.pixabay.com/photo/2019/12/19/10/55/christmas-market-4705877_960_720.jpg",
+		"https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
+		"https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
+		"https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
+	];
+
+	final Widget svg = SvgPicture.asset(
+		svgName,
+	);
+
+
+	@override
+  Widget build(BuildContext context) {
 
     return RefreshIndicator(
 		displacement: 30.0,
@@ -27,7 +39,7 @@ class _AllfeedState extends State<Allfeed> {
 				crossAxisAlignment: CrossAxisAlignment.start,
 				children: <Widget>[
 					Padding(
-						padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+						padding: EdgeInsets.fromLTRB(00, 0, 0, 0),
 						child: Column(
 							crossAxisAlignment: CrossAxisAlignment.start,
 							mainAxisAlignment: MainAxisAlignment.start,
@@ -46,13 +58,16 @@ class _AllfeedState extends State<Allfeed> {
 														fontWeight: FontWeight.w200
 													),
 												),
-												Text(
-													"Last updated 00:00:00",
-													style: TextStyle(
-														fontSize: 15.0,
-														fontWeight: FontWeight.w200
+												Padding(
+													padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+													child: Text(
+														"Last updated 00:00:00",
+														style: TextStyle(
+															fontSize: 15.0,
+															fontWeight: FontWeight.w200
+														),
+														textAlign: TextAlign.center,
 													),
-													textAlign: TextAlign.center,
 												),
 											],
 										),
@@ -74,7 +89,31 @@ class _AllfeedState extends State<Allfeed> {
 										)
 									],
 								),
-
+								Padding(
+									padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+									child: GFCarousel(
+										items: imageList.map(
+												(url) {
+												return Container(
+													margin: EdgeInsets.all(8.0),
+													child: ClipRRect(
+														borderRadius: BorderRadius.all(Radius.circular(5.0)),
+														child: Image.network(
+															url,
+															fit: BoxFit.cover,
+															width: 1000.0
+														),
+													),
+												);
+											},
+										).toList(),
+										onPageChanged: (index) {
+											setState(() {
+												index;
+											});
+										},
+									),
+								),
 								FeedCard(),
 								FeedCard(),
 								FeedCard(),

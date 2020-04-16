@@ -17,7 +17,7 @@ class _OptionsState extends State<Options> {
       displacement: 30.0,
       onRefresh: (){},
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(0),
         child: Container(
           child: SingleChildScrollView(
             padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height*0.05, 0, MediaQuery.of(context).size.height*0.07),
@@ -150,6 +150,27 @@ class _OptionsState extends State<Options> {
                         subtitleText: "Check your syllabus",
                         icon: Icon(
                           Icons.import_contacts,
+                          color: AccentColor,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: ()=>Navigator.pushNamed(context,'/timetable'),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                    ),
+                    elevation: 20,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GFListTile(
+                        titleText: "Faculty Info",
+                        subtitleText: "Get to know about your faculty here",
+                        icon: Icon(
+                          Icons.perm_contact_calendar,
                           color: AccentColor,
                           size: 40,
                         ),

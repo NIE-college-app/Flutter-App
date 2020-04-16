@@ -1,9 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nie/Allfeed.dart';
 
 var AppColor = Appcolors[4];
 
 bool dnd = false;
+
+Icon picker = Icon(
+	CupertinoIcons.photo_camera,
+	size: 90,
+);
+
+var textpicker = 'Take a picture';
+
+ImageSource source = ImageSource.gallery;
 
 var Appcolors = [
 	Colors.pinkAccent[400],
