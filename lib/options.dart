@@ -158,7 +158,7 @@ class _OptionsState extends State<Options> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()=>Navigator.pushNamed(context,'/timetable'),
+                  onTap: ()=>Navigator.pushNamed(context,'/contacts'),
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)

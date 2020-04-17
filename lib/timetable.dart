@@ -62,7 +62,7 @@ class _TimeTableState extends State<TimeTable> {
 
 class Daily_TimeTable extends StatefulWidget {
 
-   String day;
+   final String day;
 
   Daily_TimeTable(this.day);
 
@@ -108,6 +108,7 @@ class _Daily_TimeTableState extends State<Daily_TimeTable> {
             contentChild: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child:Container(
+                height: MediaQuery.of(context).size.height*0.25,
                 child: Column(
                   children: <Widget>[
                     Table(
@@ -119,74 +120,10 @@ class _Daily_TimeTableState extends State<Daily_TimeTable> {
                       children: [
                         TableRow(
                             children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text("\n7:30 - 10:15",style: fieldStyle),
-                                  Divider(
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("10:45 - 1:30",style:fieldStyle),
-                                  Divider(
-                                    thickness: 1.2,
-                                    color: Colors.black,
-                                  ),
-                                  Text("2:30 - 5:15",style:fieldStyle)
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text("\nASD"),
-                                  Divider(
-                                    height: 24,
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("ASD"),
-                                  Divider(
-                                    height: 12,
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("ASD\n")
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text("\nASD"),
-                                  Divider(
-                                    height: 24,
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("ASD"),
-                                  Divider(
-                                    height: 12,
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("ASD\n")
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text("\nASD"),
-                                  Divider(
-                                    height: 24,
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("ASD"),
-                                  Divider(
-                                    height: 12,
-                                    color: Colors.black,
-                                    thickness: 1.2,
-                                  ),
-                                  Text("ASD\n")
-                                ],
-                              ),
+                              TimeTableRow("7:30 - 10:15","10:45 - 1:30","2:30 - 5:15",0),
+                              TimeTableRow("ASD","ASD","ASD",1),
+                              TimeTableRow("ASD","ASD","ASDasd",1),
+                              TimeTableRow("ASD","ASD","ASDasd",1),
                             ]
                         )
                       ],
@@ -208,6 +145,87 @@ class _Daily_TimeTableState extends State<Daily_TimeTable> {
             ),
           )
       ),
+    );
+  }
+}
+
+
+class TimeTableRow extends StatefulWidget {
+
+  final int val;
+  final List<String> _subjects = new List<String>(3);
+  final List<TextStyle> _style = [
+    TextStyle(
+      fontSize:15,
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic,
+    ),
+    TextStyle(
+      fontSize: 15,
+      fontStyle: FontStyle.italic
+    )
+  ];
+
+  TimeTableRow(String a, String b, String c,this.val){
+    this._subjects[0]=a;
+    this._subjects[1]=b;
+    this._subjects[2]=c;
+  }
+
+  @override
+  _TimeTableRowState createState() => _TimeTableRowState();
+}
+
+class _TimeTableRowState extends State<TimeTableRow> {
+
+  @override
+  Widget build(BuildContext context) {
+    final double upper_bound = MediaQuery.of(context).size.height*0.0328;
+    final double lower_bound = MediaQuery.of(context).size.height*0.016;
+    final double boxHeight =MediaQuery.of(context).size.height*0.067;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
+            height: boxHeight,
+            child: Center(
+              child: Text(
+                "${widget._subjects[0]}",
+                style: widget._style[widget.val],
+              ),
+            )
+        ),
+        Divider(
+          height: upper_bound,
+          color: Colors.black,
+          thickness: 1.2,
+        ),
+        Container(
+            height: boxHeight,
+            child: Center(
+              child: Text(
+                "${widget._subjects[1]}",
+                style: widget._style[widget.val],
+              ),
+            )
+        ),
+        Divider(
+          height: lower_bound,
+          color: Colors.black,
+          thickness: 1.2,
+        ),
+        Container(
+            height: boxHeight,
+            child: Center(
+              child: Text(
+                "${widget._subjects[2]}",
+                style: widget._style[widget.val],
+              ),
+            )
+        )
+      ],
     );
   }
 }
