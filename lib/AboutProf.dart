@@ -105,6 +105,16 @@ class AboutProf extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: (){
+                                  _launchURL('sms:'+args.data['num']);
+                                },
+                                icon: Icon(
+                                  Icons.message,
+                                  color: Colors.green,
+                                ),
+                                color: Colors.green,
+                              ),
+                              IconButton(
+                                onPressed: (){
                                   copyToClipBoard(args.data['num']);
                                 },
 
