@@ -5,19 +5,23 @@ import 'package:nie/AboutProf.dart';
 import 'package:nie/Imagehandling.dart';
 import 'package:nie/contacts.dart';
 import 'package:nie/login.dart';
+import 'package:nie/loginPage.dart';
 import 'package:nie/settings.dart';
 import 'package:nie/timetable.dart';
 
 
 
 Map<String, Widget Function(BuildContext)> Router() {
+
+
 	var routes = {
 		'/': (_) => Login(),
 		'/settings': (_) => Settings(),
-		'/timetable':(_)=>TimeTable(),
+		'/timetable': (_) => TimeTable(),
 		'/imageUpload': (_) => ImageUplaod(),
-		'/contacts':(_)=> Contacts(),
-		'/aboutProf':(_)=>AboutProf(),
+		'/contacts': (_) =>  Contacts(),
+		'/aboutProf': (_) => AboutProf(),
+		'/loginE' : (_) => loginPage(),
 		'/aboutPost':(_)=>AboutPost(),
 	};
 	return routes;

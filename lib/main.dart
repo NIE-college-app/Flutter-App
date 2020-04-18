@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nie/login.dart';
+import 'package:nie/loginPage.dart';
 import 'package:nie/router.dart';
 import 'package:nie/globalvariables.dart';
 
@@ -20,15 +22,15 @@ class App extends StatelessWidget {
 			)
 		),
 		darkTheme: ThemeData(
-			brightness: Brightness.dark,
-			primaryTextTheme: Typography(platform: TargetPlatform.android).white,
-			textTheme: Typography(platform: TargetPlatform.android).white,
+			brightness: Brightness.light,
+			primaryTextTheme: Typography(platform: TargetPlatform.android).black,
+			textTheme: Typography(platform: TargetPlatform.android).black,
 			iconTheme: IconThemeData(
 				color: Color(0x303030)
 			)
 		),
 		title: title + 'college App',
-		initialRoute: '/',
+		initialRoute: loginStatus ? '/' : '/loginE',
 		routes: Router(),
 	);
   }

@@ -124,6 +124,29 @@ List<Map<String,Map<String,String>>> faculty =[
 	}
 ];
 
+bool loginStatus = false;
+
+class User {
+	final String uid;
+	final String photoUrl;
+	final String number;
+	final String displayName;
+	final String email;
+
+	User(this.uid, this.displayName, this.photoUrl, this.email, this.number);
+
+	Map<String, dynamic> set() {
+		 return {
+			"uid": uid,
+			"displayName": displayName,
+			"email": email,
+			"USN": '',
+			'contact': number,
+			"photoUrl": photoUrl
+		};
+	}
+
+}
 
 List<Map<String,String>> oldPostData = [
 	{
