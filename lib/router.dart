@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nie/AboutPost.dart';
 import 'package:nie/AboutProf.dart';
 import 'package:nie/Imagehandling.dart';
 import 'package:nie/contacts.dart';
-import 'package:nie/globalvariables.dart';
 import 'package:nie/login.dart';
 import 'package:nie/loginPage.dart';
 import 'package:nie/settings.dart';
@@ -22,6 +22,7 @@ Map<String, Widget Function(BuildContext)> Router() {
 		'/contacts': (_) =>  Contacts(),
 		'/aboutProf': (_) => AboutProf(),
 		'/loginE' : (_) => loginPage(),
+		'/aboutPost':(_)=>AboutPost(),
 	};
 	return routes;
 }

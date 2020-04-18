@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:getflutter/getflutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/globalvariables.dart';
 
@@ -14,6 +13,7 @@ class _PostState extends State<Post> {
 
 	TextEditingController controller = new TextEditingController();
 	TextEditingController Titlecontroller = new TextEditingController();
+	TextEditingController Linkcontroller = new TextEditingController();
 	bool event = false;
 	DateTime date;
 	DateTime tempdate;
@@ -21,7 +21,8 @@ class _PostState extends State<Post> {
 	String dropdownValue;
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return SingleChildScrollView(
+      child: RefreshIndicator(
 		onRefresh: () {},
 		child: Column(
 			mainAxisAlignment: MainAxisAlignment.start,
@@ -191,6 +192,24 @@ class _PostState extends State<Post> {
 								),
 								Padding(
 									padding: EdgeInsets.all(10),
+									child: TextField(
+										controller: Linkcontroller,
+										maxLines: 1,
+										keyboardType: TextInputType.url,
+										decoration: new InputDecoration(
+												focusColor: AppColor,
+												focusedBorder: OutlineInputBorder(
+													borderSide: BorderSide(color: AccentColor, width: 1.0),
+												),
+												enabledBorder: OutlineInputBorder(
+													borderSide: BorderSide(color: AppColor, width: 1.0),
+												),
+												hintText: 'Link to register (if any)'
+										),
+									),
+								),
+								Padding(
+									padding: EdgeInsets.all(10),
 									child: Row(
 										mainAxisAlignment: MainAxisAlignment.spaceBetween,
 										children: <Widget>[
@@ -247,6 +266,7 @@ class _PostState extends State<Post> {
 				)
 			],
 		),
-	);
+	),
+    );
   }
 }

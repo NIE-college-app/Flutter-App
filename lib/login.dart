@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:nie/OldPosts.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/post.dart';
 import 'Colfeed.dart';
@@ -18,6 +19,7 @@ class _LoginState extends State<Login> {
 
 	void nav(index) {
 		setState(() {
+			title = 'NIE';
 			Getweather();
 			if(index == 0) {
 				body = Colfeed();
@@ -30,6 +32,10 @@ class _LoginState extends State<Login> {
 			}
 			else if(index == 3) {
 				body = Post();
+			}
+			else if(index == 4){
+				body = OldPosts();
+				title = "Your old posts";
 			}
 		});
 	}
@@ -69,7 +75,8 @@ class _LoginState extends State<Login> {
 				Icon(Icons.school, size: 30, color: AccentColor,),
 				Icon(Icons.group, size: 30, color: AccentColor),
 				Icon(Icons.line_style, size: 30, color: AccentColor),
-				Icon(CupertinoIcons.pencil,size:30,color: AccentColor,)
+				Icon(CupertinoIcons.pencil,size:30,color: AccentColor,),
+				Icon(CupertinoIcons.profile_circled,size:30,color: AccentColor,)
 			],
 			onTap: (index) => nav(index),
 			animationCurve: Curves.fastLinearToSlowEaseIn,
