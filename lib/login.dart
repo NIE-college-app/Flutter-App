@@ -51,9 +51,9 @@ class _LoginState extends State<Login> {
 					child: GestureDetector(
 						child: CircleAvatar(
 							backgroundColor: Colors.white,
-							backgroundImage: AssetImage(
-								"assets/images/logo.png",
-							),
+							backgroundImage: NetworkImage(
+								data['photoUrl']
+							)
 						),
 						onTap: () =>  Navigator.pushNamed(context, '/settings'),
 					)
