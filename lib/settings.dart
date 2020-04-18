@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:nie/globalvariables.dart';
+import 'package:nie/services/auth.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 
@@ -194,6 +198,37 @@ class _SettingsState extends State<Settings> {
 								onPressed: () => accentco(4),
 							),
 						],
+					),
+					Padding(
+						padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
+						child: Column(
+							mainAxisSize: MainAxisSize.max,
+							mainAxisAlignment: MainAxisAlignment.spaceAround,
+							children: <Widget>[
+								SignInButton(
+									Buttons.Email,
+									text: "Logout",
+									onPressed: () {
+										Navigator.of(context).pushNamed('/loginE');
+										signOut();
+									},
+								),
+								Text("Follow Creators on Instagram"),
+								Row(
+									mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+									children: <Widget>[
+										CupertinoButton(
+											child: Text("@iresharma.py"),
+											onPressed: () => launch('https://www.instagram.com/iresharma.py/'),
+										),
+										CupertinoButton(
+											child: Text("@blaze_2305"),
+											onPressed: () => launch('https://www.instagram.com/blaze_2305/'),
+										)
+									],
+								),
+							],
+						),
 					)
 				]
 			),

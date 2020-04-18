@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/services/auth.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 
 class loginPage extends StatefulWidget {
@@ -24,28 +25,29 @@ class _loginPageState extends State<loginPage> {
 					Image.asset(
 						"assets/images/logo.png"
 					),
-					OutlineButton.icon(
+					SignInButton(
+						Buttons.GoogleDark,
 						onPressed: () {
 							handleSignIn().then((FirebaseUser user) {
 								User per = new User(user.uid, user.displayName, user.photoUrl, user.email, user.phoneNumber);
 								var ex = per.set();
 								setState(() {
-								  data = ex;
-								  loginStatus = true;
+									data = ex;
+									loginStatus = true;
 								});
 								Navigator.of(context).pushNamed('/');
 							});
 						},
-						icon: Icon(Icons.g_translate),
-						label: Text("Login"),
-						color: AppColor,
-						splashColor: AppColor,
-						focusColor: AppColor,
-						highlightColor: AppColor,
-					),
+						text: "Sign In with Google",
+
+					)
 				],
 			)
 		),
 	);
   }
 }
+
+
+
+
