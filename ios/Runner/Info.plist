@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app uses library to upload photos, to the feed</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -20,10 +18,31 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1902108043-ostdtst6mtkcd5g692l49pvk434h0iuu</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app usages camera to click photos and upload them to the feed</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app uses location to forecast the weather.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses location to forecast the weather.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Record audio for the video</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses library to upload photos, to the feed</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -43,13 +62,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app uses location to forecast the weather.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app usages camera to click photos and upload them to the feed</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Record audio for the video</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app uses location to forecast the weather.</string>
 </dict>
 </plist>
