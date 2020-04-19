@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/Colfeed.dart';
 
-var AppColor = Appcolors[4];
+var AppColor = Colors.blue;
 
 bool dnd = false;
 
@@ -16,23 +16,7 @@ var textpicker = 'Take a picture';
 
 ImageSource source = ImageSource.gallery;
 
-var Appcolors = [
-	Colors.pinkAccent[400],
-	Colors.deepOrangeAccent[700],
-	Colors.yellow[400],
-	Colors.lightGreenAccent[700],
-	Colors.indigoAccent[200]
-];
-
-var AccentColor = AccentColors[4];
-
-var AccentColors = [
-	Colors.red,
-	Colors.blue,
-	Colors.yellow,
-	Colors.green,
-	Colors.black38
-];
+var AccentColor = Colors.black;
 
 var svgName = 'assets/svg/sun.svg';
 

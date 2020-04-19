@@ -18,6 +18,7 @@ class _loginPageState extends State<loginPage> {
     return Scaffold(
 		appBar: AppBar(
 			title: Text("Login to access NIE App"),
+			backgroundColor: AppColor,
 		),
 		body: Center(
 			child: Column(
