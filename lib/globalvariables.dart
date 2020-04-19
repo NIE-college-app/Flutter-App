@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/Colfeed.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 var AppColor = Colors.blue;
 
@@ -119,15 +120,30 @@ class User {
 
 	User(this.uid, this.displayName, this.photoUrl, this.email, this.number);
 
-	Map<String, dynamic> set() {
-		 return {
+	void set() async {
+		  data = {
 			"uid": uid,
 			"displayName": displayName,
 			"email": email,
 			"USN": '',
 			'contact': number,
 			"photoUrl": photoUrl
-		};
+			};
+
+
+		  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+		  data.forEach((key, value) {
+			  prefs.setString(key, value);
+		  });
+
+		  prefs.setBool('loginStatus', true);
+	}
+
+	void show() async {
+		SharedPreferences prefs = await SharedPreferences.getInstance();
+		print(prefs.getBool('loginStatus'));
+		print(data);
 	}
 
 }

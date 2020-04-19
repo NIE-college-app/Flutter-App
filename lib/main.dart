@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:nie/router.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'login.dart';
+import 'loginPage.dart';
 
+Widget landing;
 
-void main(){
+void main() async{
 	SharedPreferences.setMockInitialValues({});
-	runApp(App());
+	SharedPreferences.getInstance().then((SharedPreferences prefs) {
+		var logStat = prefs.getBool('loginStatus');
+		print(logStat);
+		if(logStat != null) {
+			loginStatus = logStat;
+			landing = loginStatus ? Login() : loginPage();
+			runApp(App());
+		}
+		else {
+			loginStatus = false;
+			landing = loginStatus ? Login() : loginPage();
+			runApp(App());
+		}
+	});
 }
 
 

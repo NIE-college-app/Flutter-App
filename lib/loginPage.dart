@@ -32,11 +32,8 @@ class _loginPageState extends State<loginPage> {
 						onPressed: () {
 							handleSignIn().then((FirebaseUser user) {
 								User per = new User(user.uid, user.displayName, user.photoUrl, user.email, user.phoneNumber);
-								var ex = per.set();
-								setState(() {
-									data = ex;
-									loginStatus = true;
-								});
+								per.set();
+								per.show();
 								setState(() {
 									loginStatus = true;
 									Navigator.pushReplacement(
