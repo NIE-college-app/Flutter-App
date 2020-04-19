@@ -20,9 +20,9 @@ class App extends StatelessWidget {
 			)
 		),
 		darkTheme: ThemeData(
-			brightness: Brightness.dark,
-			primaryTextTheme: Typography(platform: TargetPlatform.android).white,
-			textTheme: Typography(platform: TargetPlatform.android).white,
+			brightness: Brightness.light,
+			primaryTextTheme: Typography(platform: TargetPlatform.android).black,
+			textTheme: Typography(platform: TargetPlatform.android).black,
 			iconTheme: IconThemeData(
 				color: Color(0x303030)
 			)

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:getflutter/components/avatar/gf_avatar.dart';
 import 'package:getflutter/components/image/gf_image_overlay.dart';
-import 'package:getflutter/components/list_tile/gf_list_tile.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,12 +26,16 @@ class AboutProf extends StatelessWidget {
     }
   }
 
-  void copyToClipBoard(String data) {
+  void copyToClipBoard(BuildContext context,String data) {
     Clipboard.setData(
         ClipboardData(
             text: data
         )
     );
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text("Copied to Clipboard!"),
+      elevation: 20,
+    ));
 
   }
 
@@ -54,11 +57,14 @@ class AboutProf extends StatelessWidget {
       ),
 
 
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[GFImageOverlay(
+      body: Builder(
+        builder: (BuildContext context){
+          return SingleChildScrollView(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  GFImageOverlay(
                     height: MediaQuery.of(context).size.width,
                     width: MediaQuery.of(context).size.width,
                     image: AssetImage('assets/images/background.jfif'),
@@ -67,169 +73,171 @@ class AboutProf extends StatelessWidget {
                       heightFactor: 0.7,
                       child: GFAvatar(
                           backgroundImage: NetworkImage(args.data['image'])
-                        ),
+                      ),
                     ),
                     boxFit: BoxFit.fill,
                   ),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          args.data['num'],
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width*0.045
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              args.data['num'],
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width*0.045
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: (){
-                                  _launchURL('tel:'+args.data['num']);
-                                },
-                                icon: Icon(
+                          Container(
+                            child:Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: (){
+                                    _launchURL('tel:'+args.data['num']);
+                                  },
+                                  icon: Icon(
                                     Icons.phone,
+                                    color: Colors.green,
+                                  ),
                                   color: Colors.green,
                                 ),
-                                color: Colors.green,
-                              ),
-                              IconButton(
-                                onPressed: (){
-                                  _launchURL('sms:'+args.data['num']);
-                                },
-                                icon: Icon(
-                                  Icons.message,
+                                IconButton(
+                                  onPressed: (){
+                                    _launchURL('sms:'+args.data['num']);
+                                  },
+                                  icon: Icon(
+                                    Icons.message,
+                                    color: Colors.green,
+                                  ),
                                   color: Colors.green,
                                 ),
-                                color: Colors.green,
-                              ),
-                              IconButton(
-                                onPressed: (){
-                                  copyToClipBoard(args.data['num']);
-                                },
+                                IconButton(
+                                  onPressed: (){
+                                    copyToClipBoard(context,args.data['num']);
+                                  },
 
-                                icon: Icon(
-                                  Icons.content_copy,
+                                  icon: Icon(
+                                    Icons.content_copy,
+                                    color: Colors.blue,
+                                  ),
                                   color: Colors.blue,
                                 ),
-                                color: Colors.blue,
-                              ),
-                            ],
-                        ),
-                      )
-                    ],
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Padding(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                args.data['email'],
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width*0.045,
+                                ),
+                                overflow: TextOverflow.clip,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child:Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: (){
+                                    _launchURL('mailto:'+args.data['email']);
+                                  },
+                                  icon: Icon(
+                                    Icons.email,
+                                    color: Colors.green,
+                                  ),
+                                  color: Colors.green,
+                                ),
+                                IconButton(
+                                  onPressed: (){
+                                    copyToClipBoard(context,args.data['email']);
+                                  },
+                                  icon: Icon(
+                                    Icons.content_copy,
+                                    color: Colors.blue,
+                                  ),
+                                  color: Colors.blue,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            args.data['email'],
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width*0.045,
-                            ),
-                            overflow: TextOverflow.clip,
-                            softWrap: true,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: (){
-                                _launchURL('mailto:'+args.data['email']);
-                              },
-                              icon: Icon(
-                                Icons.email,
-                                color: Colors.green,
-                              ),
-                              color: Colors.green,
-                            ),
-                            IconButton(
-                              onPressed: (){
-                                copyToClipBoard(args.data['email']);
-                              },
-                              icon: Icon(
-                                Icons.content_copy,
-                                color: Colors.blue,
-                              ),
-                              color: Colors.blue,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "About: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize:20,
-                              decoration: TextDecoration.underline,
-                              decorationStyle: TextDecorationStyle.double
-                          )
-                        ),
-                      ),
-
-                      Flexible(
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 13,
-                            ),
-                            child: Text(
-                              args.data["About"],
+                              "About: ",
                               style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.italic,
-                                wordSpacing: 1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:20,
+                                  decoration: TextDecoration.underline,
+                                  decorationStyle: TextDecorationStyle.double
+                              )
+                          ),
+                        ),
 
+                        Flexible(
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                top: 13,
+                              ),
+                              child: Text(
+                                args.data["About"],
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.italic,
+                                  wordSpacing: 1,
+
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+
+
+                ],
               ),
-
-
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       )
     );
   }

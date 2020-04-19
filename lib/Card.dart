@@ -13,6 +13,9 @@ class _FeedCardState extends State<FeedCard> {
     return Padding(
 		padding: EdgeInsets.all(0),
 		child: GFCard(
+			shape: RoundedRectangleBorder(
+				borderRadius: BorderRadius.circular(20)
+			),
 			boxFit: BoxFit.cover,
 			image: Image.asset('assets/images/logo.png'),
 			title: GFListTile(
