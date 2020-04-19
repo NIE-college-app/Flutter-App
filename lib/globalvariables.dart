@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nie/Allfeed.dart';
+import 'package:nie/Colfeed.dart';
 
 var AppColor = Appcolors[4];
 
@@ -58,7 +58,7 @@ Map<String,dynamic> data={
 };
 var temp = '';
 
-Widget body = Allfeed();
+Widget body = Colfeed();
 
 
 List<Map<String,Map<String,String>>> faculty =[
