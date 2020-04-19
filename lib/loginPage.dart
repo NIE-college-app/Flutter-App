@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/services/auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:nie/login.dart';
 
 
 class loginPage extends StatefulWidget {
@@ -35,7 +36,13 @@ class _loginPageState extends State<loginPage> {
 									data = ex;
 									loginStatus = true;
 								});
-								Navigator.of(context).pushNamed('/');
+								setState(() {
+									loginStatus = true;
+									Navigator.pushReplacement(
+										context,
+										new MaterialPageRoute(
+											builder: (BuildContext context) => Login()));
+								});
 							});
 						},
 						text: "Sign In with Google",

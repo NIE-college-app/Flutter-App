@@ -28,7 +28,7 @@ class App extends StatelessWidget {
 			)
 		),
 		title: title + 'college App',
-		initialRoute: loginStatus ? '/' : '/loginE',
+		initialRoute: '/',
 		routes: Router(),
 	);
   }
