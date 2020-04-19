@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nie/router.dart';
 import 'package:nie/globalvariables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-void main() => runApp(App());
+void main(){
+	SharedPreferences.setMockInitialValues({});
+	runApp(App());
+}
 
 
 class App extends StatelessWidget {

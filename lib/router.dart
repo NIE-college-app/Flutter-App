@@ -9,7 +9,7 @@ import 'package:nie/globalvariables.dart';
 import 'package:nie/login.dart';
 import 'package:nie/loginPage.dart';
 
-Widget landing = loginStatus ? Login() : loginPage();
+Widget landing = !loginStatus ? Login() : loginPage();
 
 Map<String, Widget Function(BuildContext)> Router() {
 

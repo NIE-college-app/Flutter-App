@@ -4,7 +4,7 @@ import 'package:nie/globalvariables.dart';
 Future<void> LocalStorage() async {
 
 	SharedPreferences prefs = await SharedPreferences.getInstance();
-	prefs.setString('name', 'iresh');
-	var localStorage = prefs.getKeys();
+	await prefs.setString('name', 'iresh');
+	var localStorage = prefs.get('name');
 	print(localStorage);
 }
