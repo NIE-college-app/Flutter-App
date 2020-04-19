@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:nie/OldPosts.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/post.dart';
+import 'package:nie/services/localStorage.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
@@ -65,7 +66,7 @@ class _LoginState extends State<Login> {
 								data['photoUrl']
 							)
 						),
-						onTap: () =>  Navigator.pushNamed(context, '/settings'),
+						onTap: () => LocalStorage(),
 					)
 				)
 			],

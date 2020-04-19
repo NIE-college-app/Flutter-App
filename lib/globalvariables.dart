@@ -16,23 +16,7 @@ var textpicker = 'Take a picture';
 
 ImageSource source = ImageSource.gallery;
 
-var Appcolors = [
-	Colors.pinkAccent[400],
-	Colors.deepOrangeAccent[700],
-	Colors.yellow[400],
-	Colors.lightGreenAccent[700],
-	Colors.indigoAccent[200]
-];
-
 var AccentColor = Colors.black;
-
-var AccentColors = [
-	Colors.red,
-	Colors.blue,
-	Colors.yellow,
-	Colors.green,
-	Colors.black38
-];
 
 var svgName = 'assets/svg/sun.svg';
 

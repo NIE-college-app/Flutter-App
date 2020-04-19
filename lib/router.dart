@@ -4,7 +4,6 @@ import 'package:nie/AboutPost.dart';
 import 'package:nie/AboutProf.dart';
 import 'package:nie/Imagehandling.dart';
 import 'package:nie/contacts.dart';
-import 'package:nie/settings.dart';
 import 'package:nie/timetable.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/login.dart';
@@ -16,7 +15,6 @@ Map<String, Widget Function(BuildContext)> Router() {
 
 	var routes = {
 		'/': (_) => landing,
-		'/settings': (_) => Settings(),
 		'/timetable': (_) => TimeTable(),
 		'/imageUpload': (_) => ImageUplaod(),
 		'/contacts': (_) =>  Contacts(),
