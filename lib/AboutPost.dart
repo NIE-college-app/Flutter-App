@@ -43,7 +43,7 @@ class AboutPost extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Old Posts"
+            args.data['title']
           ),
           backgroundColor: AppColor,
         ),

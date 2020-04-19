@@ -17,9 +17,12 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
+	bool oldPostsPage=false;
+
 	void nav(index) {
 		setState(() {
 			title = 'NIE';
+			oldPostsPage = false;
 			Getweather();
 			if(index == 0) {
 				body = Colfeed();
@@ -35,7 +38,8 @@ class _LoginState extends State<Login> {
 			}
 			else if(index == 4){
 				body = OldPosts();
-				title = "Your old posts";
+				oldPostsPage = true;
+				title = "Your posts";
 			}
 		});
 	}
@@ -66,6 +70,9 @@ class _LoginState extends State<Login> {
 				)
 			],
 		),
+
+		backgroundColor: oldPostsPage?Colors.black:Colors.white,
+
 		body: body,
 		bottomNavigationBar: CurvedNavigationBar(
 			backgroundColor: Theme.of(context).iconTheme.color,

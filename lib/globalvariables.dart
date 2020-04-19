@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/Colfeed.dart';
 
-var AppColor = Appcolors[4];
+var AppColor = Colors.blue;
 
 bool dnd = false;
 
@@ -24,7 +24,7 @@ var Appcolors = [
 	Colors.indigoAccent[200]
 ];
 
-var AccentColor = AccentColors[4];
+var AccentColor = Colors.black;
 
 var AccentColors = [
 	Colors.red,
