@@ -4,7 +4,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:nie/OldPosts.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/post.dart';
-import 'package:nie/services/localStorage.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
@@ -59,15 +58,12 @@ class _LoginState extends State<Login> {
 			actions: <Widget>[
 				Padding(
 					padding: EdgeInsets.all(5),
-					child: GestureDetector(
-						child: CircleAvatar(
-							backgroundColor: Colors.white,
-							backgroundImage: NetworkImage(
-								data['photoUrl']
-							)
-						),
-						onTap: () => LocalStorage(),
-					)
+					child: CircleAvatar(
+						backgroundColor: Colors.white,
+						backgroundImage: NetworkImage(
+							data['photoUrl']
+						)
+					),
 				)
 			],
 		),
