@@ -100,37 +100,42 @@ class _AllfeedState extends State<Allfeed> {
 								),
 								Padding(
 									padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-									child: GFCarousel(
-										items: imageList.map(
-												(url) {
-												return GestureDetector(
-													child: Container(
-														margin: EdgeInsets.all(8.0),
-														child: ClipRRect(
-															borderRadius: BorderRadius.all(Radius.circular(5.0)),
-															child: Image.network(
-																url,
-																fit: BoxFit.cover,
-																width: 1000.0
+									child: Column(
+										children: <Widget>[
+											Text("Events of the day"),
+											GFCarousel(
+												items: imageList.map(
+														(url) {
+														return GestureDetector(
+															child: Container(
+																margin: EdgeInsets.all(8.0),
+																child: ClipRRect(
+																	borderRadius: BorderRadius.all(Radius.circular(5.0)),
+																	child: Image.network(
+																		url,
+																		fit: BoxFit.cover,
+																		width: 1000.0
+																	),
+																),
 															),
-														),
-													),
-													onTap: () {
-														Navigator.of(context).pushNamed(''
-															'/aboutPost',
-															arguments: PostData(
-																data
-															));
+															onTap: () {
+																Navigator.of(context).pushNamed(''
+																	'/aboutPost',
+																	arguments: PostData(
+																		data
+																	));
+															},
+														);
 													},
-												);
-											},
-										).toList(),
-										onPageChanged: (index) {
-											setState(() {
-												index;
-											});
-										},
-									),
+												).toList(),
+												onPageChanged: (index) {
+													setState(() {
+														index;
+													});
+												},
+											),
+										],
+									)
 								),
 								FeedCard(),
 								FeedCard(),
