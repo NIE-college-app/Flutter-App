@@ -50,7 +50,7 @@ class _ColfeedState extends State<Colfeed> {
 													),
 												),
 												Text(
-													"Last updated 00:00:00",
+													"Last updated ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}",
 													style: TextStyle(
 														fontSize: 15.0,
 														fontWeight: FontWeight.w200
