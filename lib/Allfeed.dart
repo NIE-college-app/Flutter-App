@@ -5,6 +5,8 @@ import 'package:nie/globalvariables.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:getflutter/getflutter.dart';
 
+import 'AboutPost.dart';
+
 class Allfeed extends StatefulWidget {
   @override
   _AllfeedState createState() => _AllfeedState();
@@ -25,6 +27,13 @@ class _AllfeedState extends State<Allfeed> {
 		svgName,
 	);
 
+	Map<String, String> data = {
+		'Date' : '20-2-20',
+		'link' : 'www.google.com',
+		'title' : 'Today\'s event',
+		'post' : 'lorem ipsummmmm',
+		'photoUrl' : "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
+	};
 
 	@override
   Widget build(BuildContext context) {
@@ -94,16 +103,25 @@ class _AllfeedState extends State<Allfeed> {
 									child: GFCarousel(
 										items: imageList.map(
 												(url) {
-												return Container(
-													margin: EdgeInsets.all(8.0),
-													child: ClipRRect(
-														borderRadius: BorderRadius.all(Radius.circular(5.0)),
-														child: Image.network(
-															url,
-															fit: BoxFit.cover,
-															width: 1000.0
+												return GestureDetector(
+													child: Container(
+														margin: EdgeInsets.all(8.0),
+														child: ClipRRect(
+															borderRadius: BorderRadius.all(Radius.circular(5.0)),
+															child: Image.network(
+																url,
+																fit: BoxFit.cover,
+																width: 1000.0
+															),
 														),
 													),
+													onTap: () {
+														Navigator.of(context).pushNamed(''
+															'/aboutPost',
+															arguments: PostData(
+																data
+															));
+													},
 												);
 											},
 										).toList(),
