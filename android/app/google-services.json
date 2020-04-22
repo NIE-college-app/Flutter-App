@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1902108043-36s6kdaadrhl1lo40g9vcui33khmv0tu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iresharma.nie",
+            "certificate_hash": "95594f7f23ab25bd7891416d4417fe4eb2e5962e"
+          }
+        },
+        {
           "client_id": "1902108043-ijr6jdkipqmnh57kpdec4kndqtpev6ot.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
