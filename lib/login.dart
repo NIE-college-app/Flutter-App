@@ -172,7 +172,7 @@ class _LoginState extends State<Login> {
 													setState(() {
 														storage.write(key: 'login', value: 'false');
 													});
-													Future.delayed(Duration(milliseconds: 200), (){
+													Future.delayed(Duration(milliseconds: 500), (){
 														Navigator.pushReplacement(context, MaterialPageRoute(
 															builder: (_) => loginPage()
 														));
