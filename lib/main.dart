@@ -1,9 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:nie/login.dart';
+import 'package:nie/loginPage.dart';
 import 'package:nie/router.dart';
 import 'package:nie/globalvariables.dart';
+import 'package:nie/services/secureStorage.dart';
 
+final storage = new FlutterSecureStorage();
+dynamic check;
 
-void main() => runApp(App());
+void main() {
+	runApp(wrapper());
+}
+
+class wrapper extends StatefulWidget {
+  @override
+  _wrapperState createState() => _wrapperState();
+}
+
+class _wrapperState extends State<wrapper> {
+
+	@override
+  void initState() {
+		super.initState();
+		getStorage().then((loginStaus) {
+			if(loginStaus != null){
+
+			}
+			setState(() {
+				check = loginStaus;
+			});
+		});
+	}
+
+  @override
+  Widget build(BuildContext context) {
+    return App();
+  }
+}
 
 
 class App extends StatelessWidget {
@@ -28,8 +62,8 @@ class App extends StatelessWidget {
 			)
 		),
 		title: title + 'college App',
-		initialRoute: '/',
 		routes: Router(),
+		home: check == 'true' ? Login() : loginPage(),
 	);
   }
 }

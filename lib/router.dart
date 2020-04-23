@@ -9,12 +9,9 @@ import 'package:nie/globalvariables.dart';
 import 'package:nie/login.dart';
 import 'package:nie/loginPage.dart';
 
-Widget landing = loginStatus ? Login() : loginPage();
-
 Map<String, Widget Function(BuildContext)> Router() {
 
 	var routes = {
-		'/': (_) => landing,
 		'/timetable': (_) => TimeTable(),
 		'/imageUpload': (_) => ImageUplaod(),
 		'/contacts': (_) =>  Contacts(),

@@ -108,7 +108,7 @@ List<Map<String,Map<String,String>>> faculty =[
 	}
 ];
 
-bool loginStatus = false;
+String loginStatus = 'false';
 
 class User {
 	final String uid;

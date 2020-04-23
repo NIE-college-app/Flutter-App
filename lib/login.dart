@@ -5,6 +5,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:nie/OldPosts.dart';
 import 'package:nie/globalvariables.dart';
+import 'package:nie/loginPage.dart';
 import 'package:nie/post.dart';
 import 'package:nie/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,6 +14,7 @@ import 'Allfeed.dart';
 import 'options.dart';
 import 'package:nie/Weather.dart';
 import 'package:getflutter/getflutter.dart';
+import 'main.dart';
 
 
 class Login extends StatefulWidget {
@@ -165,7 +167,17 @@ class _LoginState extends State<Login> {
 											SignInButton(
 												Buttons.Email,
 												text: 'Logout',
-												onPressed: () => signOut(),
+												onPressed: () {
+													signOut();
+													setState(() {
+														storage.write(key: 'login', value: 'false');
+													});
+													Future.delayed(Duration(milliseconds: 200), (){
+														Navigator.pushReplacement(context, MaterialPageRoute(
+															builder: (_) => loginPage()
+														));
+													});
+												}
 											),
 											Text('Follow Developers on insta'),
 											Row(
