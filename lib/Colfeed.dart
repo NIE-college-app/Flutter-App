@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nie/Card.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nie/videoCard.dart';
 
 class Colfeed extends StatefulWidget {
   @override
@@ -78,10 +79,11 @@ class _ColfeedState extends State<Colfeed> {
 									],
 								),
 
+								VideoCard(),
 								FeedCard(),
 								FeedCard(),
 								FeedCard(),
-								FeedCard()
+								FeedCard(),
 							],
 						)
 					),
