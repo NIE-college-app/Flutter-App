@@ -38,10 +38,7 @@ class _loginPageState extends State<loginPage> {
 									data = ex;
 									loginStatus = 'true';
 									await storage.write(key: 'login', value: 'true');
-									Navigator.pushReplacement(
-										context,
-										new MaterialPageRoute(
-											builder: (BuildContext context) => Login()));
+									Navigator.pushReplacementNamed(context, '/Register');
 								});
 							});
 						},
