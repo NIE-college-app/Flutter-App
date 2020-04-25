@@ -5,6 +5,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nie/services/firebaseStorage.dart';
 
 class ImageUplaod extends StatelessWidget {
   @override
@@ -88,7 +89,11 @@ class _ImageCaptureState extends State<ImageCapture> {
                         onPressed: _clear,
                         icon: Icon(CupertinoIcons.clear),
                         label: Text("Clear")
-                    )
+                    ),
+                    OutlineButton.icon(
+                        onPressed: () => uploadFile(_imageFile, 'photo', 'photo'),
+                        icon: Icon(CupertinoIcons.share_up),
+                        label: Text('Uplaod'))
                   ],
                 )
               ],

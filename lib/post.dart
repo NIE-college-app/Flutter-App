@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/globalvariables.dart';
-
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'services/firebaseStorage.dart';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart' as p;
 
 class Post extends StatefulWidget {
   @override
@@ -11,12 +15,82 @@ class Post extends StatefulWidget {
 
 class _PostState extends State<Post> {
 
+
+	Future filePicker(BuildContext context) async {
+		try {
+			if (fileType == 'audio') {
+				file = await FilePicker.getFile(type: FileType.audio);
+				fileName = p.basename(file.path);
+				setState(() {
+					fileName = p.basename(file.path);
+				});
+				print(fileName);
+				uploadFile(file, fileName, fileType);
+			}
+			if (fileType == 'video') {
+				file = await FilePicker.getFile(type: FileType.video);
+				fileName = p.basename(file.path);
+				setState(() {
+					fileName = p.basename(file.path);
+				});
+				print(fileName);
+				uploadFile(file, fileName, fileType);
+			}
+			if (fileType == 'pdf') {
+				file = await FilePicker.getFile(type: FileType.custom);
+				fileName = p.basename(file.path);
+				setState(() {
+					fileName = p.basename(file.path);
+				});
+				print(fileName);
+				uploadFile(file, fileName, fileType);
+			}
+			if (fileType == 'others') {
+				file = await FilePicker.getFile(type: FileType.any);
+				fileName = p.basename(file.path);
+				setState(() {
+					fileName = p.basename(file.path);
+				});
+				print(fileName);
+				uploadFile(file, fileName, fileType);
+			}
+		} on PlatformException catch (e) {
+			showDialog(
+				context: context,
+				builder: (BuildContext context) {
+					return AlertDialog(
+						title: Text('Sorry...'),
+						content: Text('Unsupported exception: $e'),
+						actions: <Widget>[
+							FlatButton(
+								child: Text('OK'),
+								onPressed: () {
+									Navigator.of(context).pop();
+								},
+							)
+						],
+					);
+				}
+			);
+		}
+	}
+
+	
+
 	TextEditingController controller = new TextEditingController();
 	TextEditingController Titlecontroller = new TextEditingController();
 	TextEditingController Linkcontroller = new TextEditingController();
 	bool event = false;
 	DateTime date;
 	DateTime tempdate;
+
+	String fileType = '';
+	File file;
+	String fileName = '';
+	String operationText = '';
+	bool isUploaded = true;
+	String result = '';
+
 
 	String dropdownValue;
   @override
@@ -81,6 +155,38 @@ class _PostState extends State<Post> {
 													)
 												]
 										),
+										],
+									),
+								),
+								Text(
+									"Add",
+									style: TextStyle(
+										fontSize: 20,
+										fontWeight: FontWeight.w700
+									),
+								),
+								Padding(
+									padding: EdgeInsets.all(10),
+									child: Row(
+										mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+										children: <Widget>[
+											OutlineButton.icon(
+												onPressed: () {
+
+												},
+												icon: Icon(Icons.attach_file),
+												label: Text("Files"),
+											),
+											OutlineButton.icon(
+												onPressed: () {
+													  setState(() {
+														fileType = 'video';
+													  });
+													  filePicker(context);
+												  },
+												icon: Icon(Icons.videocam),
+												label: Text("Video"),
+											),
 											OutlineButton.icon(
 												onPressed: () {
 													showCupertinoModalPopup(
@@ -144,8 +250,8 @@ class _PostState extends State<Post> {
 														}
 													);
 												},
-												icon: Icon(Icons.add),
-												label: Text('Add Photo')
+												icon: Icon(Icons.image),
+												label: Text('Photo')
 											)
 										],
 									),
