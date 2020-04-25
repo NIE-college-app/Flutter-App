@@ -1,4 +1,6 @@
 PODS:
+  - file_picker (0.0.1):
+    - Flutter
   - Firebase/Auth (6.22.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.5.1)
@@ -133,6 +135,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_auth_web (from `.symlinks/plugins/firebase_auth_web/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -173,6 +176,8 @@ SPEC REPOS:
     - TOCropViewController
 
 EXTERNAL SOURCES:
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_auth_web:
@@ -207,12 +212,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_player_web/ios"
 
 SPEC CHECKSUMS:
+  file_picker: 408623be2125b79a4539cf703be3d4b3abe5e245
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   firebase_auth: 4ee3a54d3f09434c508c284a62f895a741a30637
   firebase_auth_web: 0955c07bcc06e84af76b9d4e32e6f31518f2d7de
   firebase_core: 0d8be0e0d14c4902953aeb5ac5d7316d1fe4b978
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
-  firebase_storage: 52033ea2e6ad58bfa852de92002598850d325c36
+  firebase_storage: d83bfc0e0e849b2f871a34c474466bf5014ff304
   FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
   FirebaseAuth: a6da11d78dfd956b7f7af3222a0f0b1c93ef8fc9
   FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9

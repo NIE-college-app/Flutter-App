@@ -14,6 +14,13 @@
 	<string>nie</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+    <key>UIBackgroundModes</key>
+    <array>
+       <string>fetch</string>
+       <string>remote-notification</string>
+    </array>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>User might want to upload a music file to share with his friends</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
