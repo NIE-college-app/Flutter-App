@@ -36,15 +36,6 @@ class _PostState extends State<Post> {
 				print(fileName);
 				uploadFile(file, fileName, fileType);
 			}
-			if (fileType == 'pdf') {
-				file = await FilePicker.getFile(type: FileType.custom);
-				fileName = p.basename(file.path);
-				setState(() {
-					fileName = p.basename(file.path);
-				});
-				print(fileName);
-				uploadFile(file, fileName, fileType);
-			}
 			if (fileType == 'others') {
 				file = await FilePicker.getFile(type: FileType.any);
 				fileName = p.basename(file.path);
@@ -172,7 +163,10 @@ class _PostState extends State<Post> {
 										children: <Widget>[
 											OutlineButton.icon(
 												onPressed: () {
-
+													setState(() {
+														fileType = 'others';
+													});
+													filePicker(context);
 												},
 												icon: Icon(Icons.attach_file),
 												label: Text("Files"),

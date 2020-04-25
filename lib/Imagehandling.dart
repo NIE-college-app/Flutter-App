@@ -21,6 +21,8 @@ class ImageCapture extends StatefulWidget {
 
 class _ImageCaptureState extends State<ImageCapture> {
 
+  TextEditingController _controller = new TextEditingController();
+
   File _imageFile;
   bool _isimg = false;
 
@@ -77,6 +79,11 @@ class _ImageCaptureState extends State<ImageCapture> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.file(_imageFile),
+                CupertinoTextField(
+                  controller: _controller,
+                  clearButtonMode: OverlayVisibilityMode.editing,
+                  placeholder: 'ImageName',
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -91,7 +98,12 @@ class _ImageCaptureState extends State<ImageCapture> {
                         label: Text("Clear")
                     ),
                     OutlineButton.icon(
-                        onPressed: () => uploadFile(_imageFile, 'photo', 'photo'),
+                        onPressed: () {
+                          uploadFile(_imageFile, _controller.text, 'photo');
+                          setState(() {
+                            _controller.text = '';
+                          });
+                        },
                         icon: Icon(CupertinoIcons.share_up),
                         label: Text('Uplaod'))
                   ],
