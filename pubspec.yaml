@@ -37,6 +37,7 @@ dependencies:
   flutter_secure_storage: ^3.3.3
   video_player: ^0.10.9
   file_picker: ^1.4.3+1
+  flare_flutter: ^2.0.3
 
 
 
@@ -63,6 +64,7 @@ flutter:
     - assets/images/background.jfif
     - assets/svg/
     - assets/video/asset.mp4
+    - assets/animation/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
