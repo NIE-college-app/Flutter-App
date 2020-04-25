@@ -36,7 +36,7 @@ dependencies:
   flutter_signin_button: ^1.0.0
   flutter_secure_storage: ^3.3.3
   video_player: ^0.10.9
-  file_picker: ^1.6.3+2
+  file_picker: ^1.4.3+1
 
 
 
