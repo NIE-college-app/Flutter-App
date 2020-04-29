@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nie/globalvariables.dart';
 
 import 'login.dart';
+import 'main.dart';
 
 
 class Register extends StatefulWidget {
@@ -28,11 +29,6 @@ var buttonColor = Colors.green;
           "REGISTER"
         ),
       ),
-
-
-      //USN
-      //phone
-      //Groups
 
 
       body: SingleChildScrollView(
@@ -317,9 +313,16 @@ var buttonColor = Colors.green;
     );
   }
 
-  submitData(){
+  submitData()async{
     if(_formKey.currentState.validate()){
       debugPrint("valid");
+        await storage.write(key: 'email', value: data['email']);
+        await storage.write(key: 'name', value: data['displayName']);
+        await storage.write(key: 'num', value: data['contact']);
+        await storage.write(key: 'usn', value: data['USN']);
+        await storage.write(key: 'sem', value: data['Semester']);
+        await storage.write(key: 'section', value: data['Section']);
+        await storage.write(key: 'pic', value: data['photoUrl']);
       Navigator.pushReplacement(
           context,
           new MaterialPageRoute(

@@ -10,6 +10,8 @@ import 'package:nie/globalvariables.dart';
 import 'package:nie/login.dart';
 import 'package:nie/loginPage.dart';
 
+import 'main.dart';
+
 Map<String, Widget Function(BuildContext)> Router() {
 
 	var routes = {
@@ -19,6 +21,7 @@ Map<String, Widget Function(BuildContext)> Router() {
 		'/aboutProf': (_) => AboutProf(),
 		'/aboutPost':(_)=>AboutPost(),
 		'/Register':(_)=>Register(),
+		'/App':(_)=>App(),
 	};
 	return routes;
 }

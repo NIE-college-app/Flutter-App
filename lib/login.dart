@@ -24,8 +24,21 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-	bool oldPostsPage=false;
+	@override
+	void initState(){
+		super.initState();
+		storage.readAll().then((onValue){
+			data["email"] =  onValue['email'];
+			data["displayName"]= onValue['name'];
+			data["contact"]= onValue['num'];
+			data["USN"]= onValue['usn'];
+			data["Semester"]= onValue['sem'];
+			data["Section"]= onValue['section'];
+			data["photoUrl"]= onValue['pic'];
+		});
+	}
 
+	bool oldPostsPage=false;
 	void nav(index) {
 		setState(() {
 			title = 'NIE';
@@ -169,9 +182,10 @@ class _LoginState extends State<Login> {
 												text: 'Logout',
 												onPressed: () {
 													signOut();
-													setState(() {
+													setState((){
 														storage.write(key: 'login', value: 'false');
 													});
+													storage.deleteAll();
 													Future.delayed(Duration(milliseconds: 500), (){
 														Navigator.pushReplacement(context, MaterialPageRoute(
 															builder: (_) => loginPage()
