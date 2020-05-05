@@ -35,6 +35,8 @@ class _LoginState extends State<Login> {
 			data["Semester"]= onValue['sem'];
 			data["Section"]= onValue['section'];
 			data["photoUrl"]= onValue['pic'];
+			data["Branch"]= onValue['branch'];
+
 		});
 	}
 
@@ -67,7 +69,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-		appBar: AppBar(
+		appBar: oldPostsPage ? null : AppBar(
 			title: Text(
 				title,
 				style: TextStyle(

@@ -39,7 +39,7 @@ dependencies:
   file_picker: ^1.4.3+1
   flare_flutter: ^2.0.3
   flare_splash_screen: ^3.0.1
-
+  webview_flutter: ^0.3.21
 
 dev_dependencies:
   flutter_test:

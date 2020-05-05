@@ -154,7 +154,7 @@ class _loginPageState extends State<loginPage> {
 						SizedBox(width: 5.0),
 						InkWell(
 							onTap: () {
-								Navigator.of(context).pushNamed('/signup');
+								Navigator.of(context).pushNamed('/Register');
 							},
 							child: Text(
 								'Register',

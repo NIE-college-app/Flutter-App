@@ -137,7 +137,7 @@ class _OptionsState extends State<Options> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()=>debugPrint("GOING TO SYLLABUS"),
+                  onTap: ()=> Navigator.of(context).pushNamed('/pdfView'),
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)
