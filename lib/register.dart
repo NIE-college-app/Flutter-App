@@ -1,328 +1,306 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:nie/globalvariables.dart';
-
 import 'login.dart';
 import 'main.dart';
+import 'package:flutter/material.dart';
 
-
-class Register extends StatefulWidget {
+class SignupPage extends StatefulWidget {
   @override
-  _RegisterState createState() => _RegisterState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _RegisterState extends State<Register> {
+class _SignupPageState extends State<SignupPage> {
 
-final _formKey = GlobalKey<FormState>();
+  ScrollController _controller = ScrollController();
 
-String dropDownValue;
-String dropDownValueYear;
+  String dropDownValue;
+  String dropDownValueYear;
 
-var buttonColor = Colors.green;
+  @override
+  void initState() {
+    super.initState();
+  }
 
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "REGISTER"
-        ),
-      ),
-
-
-      body: SingleChildScrollView(
-        child: Container  (
-          height: MediaQuery.of(context).size.height,
-          child: Form(
-            key: _formKey,
-            child: Column(
+    return new Scaffold(
+        resizeToAvoidBottomPadding: true,
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+            Widget>[
+          Container(
+            child: Stack(
               children: <Widget>[
-
-                //Phone number
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        hintText: "Enter your Phone number",
-                        labelText: "Phone number",
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 1.0,
-                          ),
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2
-                          ),
-                        ),
-
-                        labelStyle: TextStyle(
-                            backgroundColor: Colors.transparent,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
-
-                    validator: (String value){
-                      if(value.isEmpty){
-                        return "Enter a valid phone number";
-                      }else if(value.contains(RegExp(r'[0-9]')) && value.length<10){
-                        return "Enter a valid number";
-                      }
-                      else{
-                        setState(() {
-                          data['contact']=value;
-                        });
-                        return null;
-                      }
-                    },
+                Container(
+                  padding: EdgeInsets.fromLTRB(15.0, 90.0, 0.0, 0.0),
+                  child: Text(
+                    'Signup',
+                    style:
+                    TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
                   ),
                 ),
-
-                //USN
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Enter your USN",
-                        labelText: "USN",
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 1.0,
-                          ),
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2
-                          ),
-                        ),
-
-                        labelStyle: TextStyle(
-                            backgroundColor: Colors.transparent,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
-
-                    validator: (String value){
-                      if(value.isEmpty){
-                        return "Enter a valid USN";
-                      }else{
-                        setState(() {
-                          data['USN']=value;
-                        });
-                        return null;
-                      }
-                    },
-                  ),
-                ),
-
-                //Section
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Enter your Section",
-                        labelText: "Section",
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 1.0,
-                          ),
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2
-                          ),
-                        ),
-
-                        labelStyle: TextStyle(
-                            backgroundColor: Colors.transparent,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
-
-                    validator: (String value){
-                      if(value.isEmpty){
-                        return "Enter a section";
-                      }else{
-                        setState(() {
-                          data['Section']=value;
-                        });
-                        return null;
-                      }
-                    },
-                  ),
-                ),
-
-                //Department
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: DropdownButtonFormField(
-                    items: ["Civil","CSE","ECE","EEE","IPE","ISE","MCA","Mech"].map<DropdownMenuItem<String>>((String value){
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value) ,
-                      );
-                    }).toList(),
-                    onChanged: (String value){
-                      setState(() {
-                        dropDownValue = value;
-                      });;
-                    },
-                    value: dropDownValue,
-                    elevation: 20,
+                Container(
+                  padding: EdgeInsets.fromLTRB(260.0, 95.0, 0.0, 0.0),
+                  child: Text(
+                    '.',
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    decoration: InputDecoration(
-                        hintText: "Choose your department",
-                        labelText: "Department",
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 1.0,
-                          ),
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2
-                          ),
-                        ),
-
-                        labelStyle: TextStyle(
-                            backgroundColor: Colors.transparent,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
-                    validator: (String value){
-                      if(value==null || value.isEmpty){
-                        return "Choose one option";
-                      }else{
-                        data['Branch']=dropDownValue;
-                        return null;
-                      }
-                    },
+                        fontSize: 80.0,
+                        fontWeight: FontWeight.bold,
+                        color: AppColor),
                   ),
-                ),
-
-                //Semester
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: DropdownButtonFormField(
-                    items: [1,2,3,4,5,6,7,8].map<DropdownMenuItem<String>>((int value){
-                      return DropdownMenuItem<String>(
-                        value: value.toString(),
-                        child: Text(value.toString()) ,
-                      );
-                    }).toList(),
-                    onChanged: (String value){
-                      setState(() {
-                        dropDownValueYear = value;
-                      });
-                    },
-                    value: dropDownValueYear,
-                    elevation: 20,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    decoration: InputDecoration(
-                        hintText: "Choose your Semester",
-                        labelText: "Semester",
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 1.0,
-                          ),
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2
-                          ),
-                        ),
-
-                        hintStyle: TextStyle(
-                            backgroundColor: Colors.transparent
-                        ),
-
-                        labelStyle: TextStyle(
-                            backgroundColor: Colors.transparent,
-                            fontWeight: FontWeight.bold
-                        )
-
-                    ),
-                    validator: (String value){
-                      if(value==null || value.isEmpty){
-                        return "Choose one option";
-                      }else{
-                        setState(() {
-                          data['Semester']=value;
-                        });
-                        return null;
-                      }
-                    },
-                  ),
-                ),
-
-                //Button
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    onPressed: submitData,
-                    elevation: 15,
-                    color: buttonColor,
-                    child: Text(
-                        "Submit"
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18)
-                    ),
-                  ),
-                ),
+                )
               ],
             ),
           ),
-        ),
-      ),
-    );
+          Expanded(
+            child: SingleChildScrollView(
+              controller: _controller,
+              child: Form(
+                key: _formKey,
+                child: Container(
+                    padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0, bottom: 0),
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          validator: (value){
+                            String regex="^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*\$";
+                            if(RegExp(regex).hasMatch(value)){
+                              return null;
+                            }else{
+                              return "Invalid email";
+                            }
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'EMAIL',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              // hintText: 'EMAIL',
+                              // hintStyle: ,
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextField(
+                          decoration: InputDecoration(
+                              labelText: 'PASSWORD ',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                          obscureText: true,
+                        ),
+
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          validator: (String value){
+                            if(value.isEmpty){
+                              return "Enter a valid name";
+                            }else if(value.length<=6){
+                              return "Password must be longer than 6 characters";
+                            }else{
+                              setState(() {
+                                data['name']=value;
+                              });
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'NAME ',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
+                          validator: (String value){
+                            if(value.isEmpty){
+                              return "Enter a valid phone number";
+                            }else if(value.contains(RegExp(r'[0-9]')) && value.length<10){
+                              return "Enter a valid number";
+                            }
+                            else{
+                              setState(() {
+                                data['contact']=value;
+                              });
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'PHONE NUMBER ',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          validator: (String value){
+                            if(value.isEmpty){
+                              return "Enter a valid USN";
+                            }else{
+                              setState(() {
+                                data['USN']=value;
+                              });
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'USN ',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          validator: (String value){
+                            if(value.isEmpty){
+                              return "Enter a valid section";
+                            }else{
+                              setState(() {
+                                data['USN']=value;
+                              });
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'SECTION ',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                        ),
+                        SizedBox(height: 10.0),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.4,
+                              child: DropdownButtonFormField(
+                                validator: (String value){
+                                  if(value==null || value.isEmpty){
+                                    return "Choose one option";
+                                  }else{
+                                    setState(() {
+                                      data['Department']=value;
+                                    });
+                                    return null;
+                                  }
+                                },
+                                items: ["Civil","CSE","ECE","EEE","IPE","ISE","MCA","Mech"].map<DropdownMenuItem<String>>((String value){
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value) ,
+                                  );
+                                }).toList(),
+                                onChanged: (String value){
+                                  setState(() {
+                                    dropDownValue = value;
+                                  });
+                                },
+
+                                decoration: InputDecoration(
+                                  hintText: "Choose your Department",
+                                  labelText: "Department",
+                                ),
+                                value: dropDownValue,
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.4,
+                              child: DropdownButtonFormField(
+                                validator: (String value){
+                                  if(value==null || value.isEmpty){
+                                    return "Choose one option";
+                                  }else{
+                                    setState(() {
+                                      data['Semester']=value;
+                                    });
+                                    return null;
+                                  }
+                                },
+                                items: [1,2,3,4,5,6,7,8].map<DropdownMenuItem<String>>((int value){
+                                  return DropdownMenuItem<String>(
+                                    value: value.toString(),
+                                    child: Text(value.toString()) ,
+                                  );
+                                }).toList(),
+                                onChanged: (String value){
+                                  setState(() {
+                                    dropDownValueYear = value;
+                                  });
+                                },
+                                value: dropDownValueYear,
+                                decoration: InputDecoration(
+                                  hintText: "Choose your Semester",
+                                  labelText: "Semester",
+
+                                ),
+                              ),
+                            )
+
+                          ],
+                        ),
+                        SizedBox(height: 40.0),
+                        Container(
+                            height: 40.0,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Colors.blueGrey,
+                              color: AppColor,
+                              elevation: 3.0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  submitData();
+                                },
+                                child: Center(
+                                  child: Text(
+                                    'RESGISTER',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                ),
+                              ),
+                            )),
+                        SizedBox(height: 30,)
+                      ],
+                    )),
+              ),
+            ),
+          )
+
+
+        ]));
   }
 
   submitData()async{
     if(_formKey.currentState.validate()){
       debugPrint("valid");
-        await storage.write(key: 'email', value: data['email']);
-        await storage.write(key: 'name', value: data['displayName']);
-        await storage.write(key: 'num', value: data['contact']);
-        await storage.write(key: 'usn', value: data['USN']);
-        await storage.write(key: 'sem', value: data['Semester']);
-        await storage.write(key: 'section', value: data['Section']);
-        await storage.write(key: 'pic', value: data['photoUrl']);
+      await storage.write(key: 'email', value: data['email']);
+      await storage.write(key: 'name', value: data['displayName']);
+      await storage.write(key: 'num', value: data['contact']);
+      await storage.write(key: 'usn', value: data['USN']);
+      await storage.write(key: 'sem', value: data['Semester']);
+      await storage.write(key: 'section', value: data['Section']);
+      await storage.write(key: 'pic', value: data['photoUrl']);
+      await storage.write(key: 'branch', value: data['Branch']);
       Navigator.pushReplacement(
           context,
           new MaterialPageRoute(
@@ -330,5 +308,4 @@ var buttonColor = Colors.green;
       );
     }
   }
-
 }

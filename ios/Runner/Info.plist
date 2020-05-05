@@ -14,13 +14,13 @@
 	<string>nie</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-    <key>UIBackgroundModes</key>
-    <array>
-       <string>fetch</string>
-       <string>remote-notification</string>
-    </array>
-    <key>NSAppleMusicUsageDescription</key>
-    <string>User might want to upload a music file to share with his friends</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>User might want to upload a music file to share with his friends</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
@@ -64,6 +64,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -74,9 +76,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-    </dict>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

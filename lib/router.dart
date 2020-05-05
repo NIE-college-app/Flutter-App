@@ -4,6 +4,7 @@ import 'package:nie/AboutPost.dart';
 import 'package:nie/AboutProf.dart';
 import 'package:nie/Imagehandling.dart';
 import 'package:nie/contacts.dart';
+import 'package:nie/pdfBiew.dart';
 import 'package:nie/register.dart';
 import 'package:nie/timetable.dart';
 import 'package:nie/globalvariables.dart';
@@ -20,8 +21,9 @@ Map<String, Widget Function(BuildContext)> Router() {
 		'/contacts': (_) =>  Contacts(),
 		'/aboutProf': (_) => AboutProf(),
 		'/aboutPost':(_)=>AboutPost(),
-		'/Register':(_)=>Register(),
+		'/Register':(_)=>SignupPage(),
 		'/App':(_)=>App(),
+		'/pdfView': (_) => pdfView()
 	};
 	return routes;
 }
