@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
 				body = Post();
 			}
 			else if(index == 4){
-				body = OldPosts();
+				body = MyHomePage();
 				oldPostsPage = true;
 				title = "Your posts";
 			}
