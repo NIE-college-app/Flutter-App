@@ -27,17 +27,17 @@ class _LoginState extends State<Login> {
 	@override
 	void initState(){
 		super.initState();
-		storage.readAll().then((onValue){
-			data["email"] =  onValue['email'];
-			data["displayName"]= onValue['name'];
-			data["contact"]= onValue['num'];
-			data["USN"]= onValue['usn'];
-			data["Semester"]= onValue['sem'];
-			data["Section"]= onValue['section'];
-			data["photoUrl"]= onValue['pic'];
-			data["Branch"]= onValue['branch'];
-
-		});
+//		storage.readAll().then((onValue){
+//			data["email"] =  onValue['email'];
+//			data["displayName"]= onValue['name'];
+//			data["contact"]= onValue['num'];
+//			data["USN"]= onValue['usn'];
+//			data["Semester"]= onValue['sem'];
+//			data["Section"]= onValue['section'];
+//			data["photoUrl"]= onValue['pic'];
+//			data["Branch"]= onValue['branch'];
+//
+//		});
 	}
 
 	bool oldPostsPage=false;
@@ -70,6 +70,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
 		appBar: oldPostsPage ? null : AppBar(
+			elevation: 0,
 			title: Text(
 				title,
 				style: TextStyle(

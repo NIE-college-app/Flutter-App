@@ -148,20 +148,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
-  flare_loading:
-    dependency: transitive
-    description:
-      name: flare_loading
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
-  flare_splash_screen:
-    dependency: "direct main"
-    description:
-      name: flare_splash_screen
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -268,6 +254,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1+1"
+  liquid_pull_to_refresh:
+    dependency: "direct main"
+    description:
+      name: liquid_pull_to_refresh
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   matcher:
     dependency: transitive
     description:
@@ -357,6 +350,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.5"
+  splashscreen:
+    dependency: "direct main"
+    description:
+      name: splashscreen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   stack_trace:
     dependency: transitive
     description:

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_splash_screen/flare_splash_screen.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -42,6 +42,10 @@ void main() {
 	runApp(wrapper());
 }
 
+
+
+Widget landing;
+
 class wrapper extends StatefulWidget {
   @override
   _wrapperState createState() => _wrapperState();
@@ -58,6 +62,7 @@ class _wrapperState extends State<wrapper> {
 			}
 			setState(() {
 				check = loginStaus;
+				landing = check != null ? Login() : loginPage();
 			});
 		});
 
@@ -93,30 +98,14 @@ class App extends StatelessWidget {
 		),
 		title: title + 'college App',
 		routes: Router(),
-		home:Builder(
-				builder: (context)=>Center(
-					child: AnimatedContainer(
-						curve: Curves.slowMiddle,
-						duration: Duration(milliseconds: 300),
-						height: 300,
-						width: 300,
-						child: FlareActor(
-							'assets/animation/splash_test.flr',
-							alignment: Alignment.center,
-							fit: BoxFit.cover,
-							animation: "Alarm",
-							callback:(value){
-								debugPrint(value);
-								Navigator.pushReplacement(
-										context,
-										new MaterialPageRoute(
-												builder: (BuildContext context) => check == 'true' ? Login() : loginPage())
-								);
-							},
-						),
-					),
-				),
-			),
-		);
+		home: SplashScreen(
+			seconds: 10,
+			backgroundColor: Colors.black,
+			loaderColor: AppColor,
+			image: Image.asset('assets/animation/loading.gif'),
+			photoSize: 150,
+			navigateAfterSeconds: landing,
+		)
+	);
   }
 }

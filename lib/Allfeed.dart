@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:nie/Card.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,9 +39,9 @@ class _AllfeedState extends State<Allfeed> {
 	@override
   Widget build(BuildContext context) {
 
-    return RefreshIndicator(
-		displacement: 30.0,
+    return LiquidPullToRefresh(
 		onRefresh: () {},
+		showChildOpacityTransition: false,
 		child:SingleChildScrollView(
 			child: Column(
 				mainAxisSize: MainAxisSize.max,
@@ -48,7 +49,7 @@ class _AllfeedState extends State<Allfeed> {
 				crossAxisAlignment: CrossAxisAlignment.start,
 				children: <Widget>[
 					Padding(
-						padding: EdgeInsets.fromLTRB(00, 0, 0, 0),
+						padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 						child: Column(
 							crossAxisAlignment: CrossAxisAlignment.start,
 							mainAxisAlignment: MainAxisAlignment.start,
@@ -138,8 +139,18 @@ class _AllfeedState extends State<Allfeed> {
 									)
 								),
 								FeedCard(),
+								Divider(
+									thickness: 1,
+									height: 3,
+								),
 								FeedCard(),
+								Divider(
+									thickness: 1,
+								),
 								FeedCard(),
+								Divider(
+									thickness: 1,
+								),
 								FeedCard()
 							],
 						)
