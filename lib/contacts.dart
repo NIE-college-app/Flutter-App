@@ -55,7 +55,7 @@ class _ContactTileState extends State<ContactTile> {
           Navigator.pushNamed(
               context,
               '/aboutProf',
-              arguments: ScreenArgs(
+              arguments: ProfData(
                   widget.data.keys.toList()[0],
                   widget.data.values.toList()[0],
               )
