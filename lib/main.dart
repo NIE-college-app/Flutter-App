@@ -12,29 +12,6 @@ import 'package:nie/globalvariables.dart';
 import 'package:nie/services/secureStorage.dart';
 
 final storage = new FlutterSecureStorage();
-//
-//class Student {
-//	String studentId;
-//	String studentName;
-//	int studentScores;
-//	Student({this.studentId, this.studentName, this.studentScores});
-//	factory Student.fromJson(Map<String, dynamic> parsedJson) {
-//		return Student(
-//				studentId: parsedJson['id'],
-//				studentName: parsedJson['name'],
-//				studentScores: parsedJson['score']);
-//	}
-//}
-//
-//Future<String> _loadAStudentAsset() async {
-//	return await rootBundle.loadString('assets/student.json');
-//}
-//
-//Future<Student> loadStudent() async {
-//	String jsonString = await _loadAStudentAsset();
-//	final jsonResponse = json.decode(jsonString);
-//	return new Student.fromJson(jsonResponse);
-//}
 
 void main() {
 //	Student student = await loadStudent();
@@ -44,7 +21,7 @@ void main() {
 
 
 //Widget landing = Login();
-Widget landing;
+Widget landing = loginPage();
 class wrapper extends StatefulWidget {
   @override
   _wrapperState createState() => _wrapperState();
@@ -52,20 +29,6 @@ class wrapper extends StatefulWidget {
 
 class _wrapperState extends State<wrapper> {
 
-//	@override
-//  void initState() {
-//		super.initState();
-//		getStorage().then((loginStaus) {
-//			if(loginStaus != null){
-//
-//			}
-//			setState(() {
-//				check = loginStaus;
-//				landing = Login();
-//			});
-//		});
-//
-//	}
 
 	@override
 	void initState() {
@@ -100,7 +63,24 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
 
+	@override
+	void initState() {
+		super.initState();
+		setState(() {
+			checklog().then((check) {
+				if(check == 'true') {
+					landing = Login();
+				}
+				else if(check == 'false' || checklog  == null) {
+					landing = loginPage();
+				}
+			});
+		});
+	}
 
+	Future<String> checklog() async {
+		return await storage.read(key: 'logged');
+	}
 
 	@override
 	Widget build(BuildContext context) {
