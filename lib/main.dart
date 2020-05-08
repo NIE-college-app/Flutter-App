@@ -62,7 +62,7 @@ class _wrapperState extends State<wrapper> {
 			}
 			setState(() {
 				check = loginStaus;
-				landing = check != null ? Login() : loginPage();
+				landing = Login();
 			});
 		});
 
@@ -99,7 +99,7 @@ class App extends StatelessWidget {
 		title: title + 'college App',
 		routes: Router(),
 		home: SplashScreen(
-			seconds: 10,
+			seconds: 8,
 			backgroundColor: Colors.black,
 			loaderColor: AppColor,
 			image: Image.asset('assets/animation/loading.gif'),

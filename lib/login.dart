@@ -24,9 +24,15 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
+	PageController _pageController;
+
+	int _page = 0;
+
 	@override
 	void initState(){
 		super.initState();
+		_pageController = new PageController();
+		Getweather();
 //		storage.readAll().then((onValue){
 //			data["email"] =  onValue['email'];
 //			data["displayName"]= onValue['name'];
@@ -40,11 +46,15 @@ class _LoginState extends State<Login> {
 //		});
 	}
 
-	bool oldPostsPage=false;
+	void onPageChanged(int page) {
+		setState(() {
+			this._page = page;
+		});
+	}
+
 	void nav(index) {
 		setState(() {
 			title = 'NIE';
-			oldPostsPage = false;
 			Getweather();
 			if(index == 0) {
 				body = Colfeed();
@@ -60,16 +70,20 @@ class _LoginState extends State<Login> {
 			}
 			else if(index == 4){
 				body = MyHomePage();
-				oldPostsPage = true;
 				title = "Your posts";
 			}
 		});
+		_pageController.animateToPage(
+			index,
+			duration: const Duration(milliseconds: 300),
+			curve: Curves.ease
+		);
 	}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-		appBar: oldPostsPage ? null : AppBar(
+		appBar: AppBar(
 			elevation: 0,
 			title: Text(
 				title,
@@ -91,7 +105,7 @@ class _LoginState extends State<Login> {
 			],
 		),
 
-		backgroundColor: oldPostsPage?Colors.black:Colors.white,
+		backgroundColor: Colors.white,
 		drawer:
 		GFDrawer(
 			child: ListView(
@@ -219,7 +233,17 @@ class _LoginState extends State<Login> {
 				],
 			),
 		),
-		body: body,
+		body: PageView(
+			controller: _pageController,
+			children: <Widget>[
+				Colfeed(),
+				Allfeed(),
+				Options(),
+				Post(),
+				MyHomePage()
+			],
+			onPageChanged: onPageChanged,
+		),
 		bottomNavigationBar: CurvedNavigationBar(
 			backgroundColor: Theme.of(context).iconTheme.color,
 			color: AppColor,
@@ -233,6 +257,7 @@ class _LoginState extends State<Login> {
 			],
 			onTap: (index) => nav(index),
 			animationCurve: Curves.fastLinearToSlowEaseIn,
+			index: _page,
 		),
 	);
   }

@@ -30,10 +30,8 @@ class _VideoCardState extends State<VideoCard> {
     return Padding(
 		padding: EdgeInsets.all(10),
 		child: Card(
-			shape: RoundedRectangleBorder(
-				borderRadius: BorderRadius.circular(20)
-			),
-			elevation: 5,
+			color: Colors.grey.shade100,
+			
 			child: Column(
 				mainAxisSize: MainAxisSize.max,
 				mainAxisAlignment: MainAxisAlignment.spaceBetween,

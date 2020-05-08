@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:getflutter/components/image/gf_image_overlay.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:nie/AboutPost.dart';
@@ -19,6 +20,23 @@ class _MyHomePageState extends State<MyHomePage> {
   final String url = 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/09/04/15/lionel-messi-0.jpg?';
   ScrollController _controller = ScrollController();
 
+  final Widget likes = SvgPicture.asset(
+    'assets/svg/icons8-love.svg',
+  );
+
+  final Widget members = SvgPicture.asset(
+    'assets/svg/icons8-people.svg',
+  );
+
+  final Widget events = SvgPicture.asset(
+    'assets/svg/icons8-event_accepted.svg',
+  );
+
+  final Widget post = SvgPicture.asset(
+	  'assets/svg/icons8-easel.svg',
+  );
+
+
   @override
   void initState() {
     super.initState();
@@ -31,10 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Profile'),
         elevation: 0,
         backgroundColor: AppColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: (){},
-        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -60,20 +74,23 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(left: 16),
                         child: Column(
                           children: <Widget>[
-                            Text('Familiar',
+                            likes,
+                            Text(
+                                'Likes',
                               style: TextStyle(
-                                  color: Colors.white
+                                color: Colors.white
                               ),
                             ),
-                            Text('12',
+                            Text(
+                                '12',
                               style: TextStyle(
-                                  color: Colors.white
+                                color: Colors.white
                               ),
                             )
                           ],
@@ -94,7 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.only(right: 16),
                         child: Column(
                           children: <Widget>[
-                            Text('Following',
+                            members,
+                            Text('Members',
                               style: TextStyle(
                                   color: Colors.white
                               ),
@@ -110,16 +128,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10
-                    ),
-                    child: Text("ID: 14552566",
-                      style: TextStyle(
-                          color: Colors.white70
-                      ),
-                    ),
-                  ),
-                  Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 32),
                     child: Text('Herman Jimenez',
                       style: TextStyle(
@@ -132,125 +140,84 @@ class _MyHomePageState extends State<MyHomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Column(
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Icon(Icons.group_add, color: Colors.white,),
-                            Text('Friends',
-                              style: TextStyle(
-                                  color: Colors.white
+                            events,
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              child: Text(
+                                '12',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white
+                                ),
                               ),
                             ),
+                            Text(
+                              'Events',
+                              style: TextStyle(
+                                fontSize: 20,
+                                  color: Colors.white
+                              ),
+                            )
                           ],
                         ),
-                        Column(
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Icon(Icons.group, color: Colors.white,),
-                            Text('Groups',
-                              style: TextStyle(
-                                  color: Colors.white
+                            post,
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              child: Text(
+                                '12',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Icon(Icons.videocam, color: Colors.white,),
-                            Text('Videos',
+                            Text(
+                              'Posts',
                               style: TextStyle(
+                                  fontSize: 20,
                                   color: Colors.white
                               ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Icon(Icons.favorite, color: Colors.white,),
-                            Text('Likes',
-                              style: TextStyle(
-                                  color: Colors.white
-                              ),
-                            ),
+                            )
                           ],
                         )
-                      ],
+                      ]
                     ),
                   )
                 ],
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height/3,
-              padding: EdgeInsets.all(42),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.table_chart, color: Colors.grey,),
-                          Text('Leaders',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.show_chart, color: Colors.grey,),
-                          Text('Level up',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.card_giftcard, color: Colors.grey,),
-                          Text('Leaders',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.code, color: Colors.grey,),
-                          Text('QR code')
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.blur_circular, color: Colors.grey,),
-                          Text('Daily bonus')
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.visibility, color: Colors.grey,),
-                          Text('Visitors')
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
+           Container(
+             padding: EdgeInsets.fromLTRB(4, 4, 4, 0),
+             height: MediaQuery.of(context).size.height*0.7,
+             child:  GridView.count(
+               crossAxisCount: 3,
+               crossAxisSpacing: 5,
+               mainAxisSpacing: 5,
+               children: List.generate(30, (index) {
+                 return Center(
+                   child: Stack(
+                     fit: StackFit.expand,
+                     children: <Widget>[
+                       Image(
+                         image: NetworkImage(url),
+                         fit: BoxFit.fill,
+                       ),
+                     ],
+                   )
+                 );
+               }),
+             ),
+           )
           ],
         ),
       )
