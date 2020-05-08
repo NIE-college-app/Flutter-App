@@ -31,7 +31,7 @@ class _VideoCardState extends State<VideoCard> {
 		padding: EdgeInsets.all(10),
 		child: Card(
 			color: Colors.grey.shade100,
-			
+
 			child: Column(
 				mainAxisSize: MainAxisSize.max,
 				mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -19,7 +19,7 @@ Map<String, Widget Function(BuildContext)> Router() {
 		'/timetable': (_) => TimeTable(),
 		'/imageUpload': (_) => ImageUplaod(),
 		'/contacts': (_) =>  Contacts(),
-		'/aboutProf': (_) => AboutProf(),
+		'/aboutProf': (_) => ProfilePage(),
 		'/aboutPost':(_)=>AboutPost(),
 		'/Register':(_)=>SignupPage(),
 		'/App':(_)=>App(),
