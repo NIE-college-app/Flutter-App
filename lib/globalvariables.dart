@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/Colfeed.dart';
 
-Color AppColor = Colors.blue;
+Color AppColor = Colors.blueAccent	;
 
 bool dnd = false;
 
