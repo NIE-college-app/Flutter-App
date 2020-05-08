@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nie/Colfeed.dart';
 
-var AppColor = Colors.blue;
+Color AppColor = Colors.blue;
 
 bool dnd = false;
 
@@ -12,17 +12,17 @@ Icon picker = Icon(
 	size: 90,
 );
 
-var textpicker = 'Take a picture';
+String textpicker = 'Take a picture';
 
 ImageSource source = ImageSource.gallery;
 
-var AccentColor = Colors.black;
+Color AccentColor = Colors.black;
 
-var svgName = 'assets/svg/sun.svg';
+String svgName = 'assets/svg/sun.svg';
 
-var navcolors = Colors.white;
+Color navcolors = Colors.white;
 
-var title = 'NIE';
+String title = 'NIE';
 
 Map<String,dynamic> data={
 	"displayName":"Uttkarsh Singh",
@@ -40,7 +40,7 @@ Map<String,dynamic> data={
 		"College"
 	]
 };
-var temp = '';
+String temp = '';
 
 Widget body = Colfeed();
 

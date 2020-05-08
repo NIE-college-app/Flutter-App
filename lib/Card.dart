@@ -13,11 +13,16 @@ class _FeedCardState extends State<FeedCard> {
     return Padding(
 		padding: EdgeInsets.all(0),
 		child: GFCard(
+			color: Colors.grey.shade100,
+			border: Border.all(
+				width: 2,
+				color: Colors.grey
+			),
 			shape: RoundedRectangleBorder(
-				borderRadius: BorderRadius.circular(20)
+				borderRadius: BorderRadius.circular(0)
 			),
 			boxFit: BoxFit.cover,
-			image: Image.asset('assets/images/logo.png'),
+			image: Image.asset('assets/images/man.jpg'),
 			title: GFListTile(
 				avatar:GFAvatar(
 					backgroundImage: AssetImage('assets/images/logo.png',),
@@ -52,7 +57,7 @@ class _FeedCardState extends State<FeedCard> {
 					)
 				],
 			),
-			elevation: 5,
+			elevation: 0,
 		),
 	);
   }

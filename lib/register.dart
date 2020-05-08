@@ -82,19 +82,6 @@ class _SignupPageState extends State<SignupPage> {
                                   borderSide: BorderSide(color: AppColor))),
                         ),
                         SizedBox(height: 10.0),
-                        TextField(
-                          decoration: InputDecoration(
-                              labelText: 'PASSWORD ',
-                              labelStyle: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: AppColor))),
-                          obscureText: true,
-                        ),
-
-                        SizedBox(height: 10.0),
                         TextFormField(
                           validator: (String value){
                             if(value.isEmpty){
@@ -108,6 +95,19 @@ class _SignupPageState extends State<SignupPage> {
                               return null;
                             }
                           },
+                          decoration: InputDecoration(
+                              labelText: 'PASSWORD ',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColor))),
+                          obscureText: true,
+                        ),
+
+                        SizedBox(height: 10.0),
+                        TextFormField(
                           decoration: InputDecoration(
                               labelText: 'NAME ',
                               labelStyle: TextStyle(
@@ -257,28 +257,31 @@ class _SignupPageState extends State<SignupPage> {
                           ],
                         ),
                         SizedBox(height: 40.0),
-                        Container(
-                            height: 40.0,
-                            child: Material(
-                              borderRadius: BorderRadius.circular(20.0),
-                              shadowColor: Colors.blueGrey,
-                              color: AppColor,
-                              elevation: 3.0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  submitData();
-                                },
-                                child: Center(
-                                  child: Text(
-                                    'RESGISTER',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Montserrat'),
+                        GestureDetector(
+                          onTap: () => submitData(),
+                          child: Container(
+                              height: 40.0,
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor: Colors.blueGrey,
+                                color: AppColor,
+                                elevation: 3.0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    submitData();
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'RESGISTER',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Montserrat'),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )),
+                              )),
+                        ),
                         SizedBox(height: 30,)
                       ],
                     )),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:nie/Card.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,75 +22,77 @@ class _ColfeedState extends State<Colfeed> {
 		  svgName,
 	  );
 
-    return RefreshIndicator(
-		displacement: 30.0,
-		onRefresh: (){},
-		child:SingleChildScrollView(
-			child: Column(
-				mainAxisSize: MainAxisSize.max,
-				mainAxisAlignment: MainAxisAlignment.start,
-				crossAxisAlignment: CrossAxisAlignment.start,
-				children: <Widget>[
-					Padding(
-						padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-						child: Column(
-							crossAxisAlignment: CrossAxisAlignment.start,
-							mainAxisAlignment: MainAxisAlignment.start,
-							children: <Widget>[
-								Row(
-									mainAxisAlignment: MainAxisAlignment.spaceBetween,
-									mainAxisSize: MainAxisSize.max,
-									children: <Widget>[
-										Column(
-											mainAxisAlignment: MainAxisAlignment.start,
-											children: <Widget>[
-												Text(
-													"College",
-													style: TextStyle(
-														fontSize: 70.0,
-														fontWeight: FontWeight.w200
-													),
-												),
-												Text(
-													"Last updated ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}",
-													style: TextStyle(
-														fontSize: 15.0,
-														fontWeight: FontWeight.w200
-													),
-													textAlign: TextAlign.center,
-												),
-											],
-										),
-										Column(
-											mainAxisAlignment: MainAxisAlignment.start,
-											children: <Widget>[
-												Column(
-													mainAxisAlignment: MainAxisAlignment.center,
-													children: <Widget>[
-														SizedBox(
-															height: 60,
-															width: 100,
-															child: svg,
+    return Scaffold(
+		backgroundColor: Colors.white,
+		body: LiquidPullToRefresh(
+			onRefresh: (){},
+			child:SingleChildScrollView(
+				child: Column(
+					mainAxisSize: MainAxisSize.max,
+					mainAxisAlignment: MainAxisAlignment.start,
+					crossAxisAlignment: CrossAxisAlignment.start,
+					children: <Widget>[
+						Padding(
+							padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+							child: Column(
+								crossAxisAlignment: CrossAxisAlignment.start,
+								mainAxisAlignment: MainAxisAlignment.start,
+								children: <Widget>[
+									Row(
+										mainAxisAlignment: MainAxisAlignment.spaceBetween,
+										mainAxisSize: MainAxisSize.max,
+										children: <Widget>[
+											Column(
+												mainAxisAlignment: MainAxisAlignment.start,
+												children: <Widget>[
+													Text(
+														"College",
+														style: TextStyle(
+															fontSize: 70.0,
+															fontWeight: FontWeight.w200
 														),
-														Text(temp)
-													],
-												)
-											],
-										)
-									],
-								),
+													),
+													Text(
+														"Last updated ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}",
+														style: TextStyle(
+															fontSize: 15.0,
+															fontWeight: FontWeight.w200
+														),
+														textAlign: TextAlign.center,
+													),
+												],
+											),
+											Column(
+												mainAxisAlignment: MainAxisAlignment.start,
+												children: <Widget>[
+													Column(
+														mainAxisAlignment: MainAxisAlignment.center,
+														children: <Widget>[
+															SizedBox(
+																height: 60,
+																width: 100,
+																child: svg,
+															),
+															Text(temp)
+														],
+													)
+												],
+											)
+										],
+									),
 
-								VideoCard(),
-								FeedCard(),
-								FeedCard(),
-								FeedCard(),
-								FeedCard(),
-							],
-						)
-					),
-				],
+									VideoCard(),
+									FeedCard(),
+									FeedCard(),
+									FeedCard(),
+									FeedCard(),
+								],
+							)
+						),
+					],
+				)
 			)
-		)
+		),
 	);
   }
 }
