@@ -15,9 +15,24 @@ class _SignupPageState extends State<SignupPage> {
   String dropDownValue;
   String dropDownValueYear;
 
+  bool ema = false;
+  bool phone = false;
+  bool nam = false;
+
+
   @override
   void initState() {
     super.initState();
+    if(data['email'] != '') {
+      ema = true;
+    }
+    if(data['num'] != '' && data['num'] != null) {
+      phone = true;
+    }
+    if(data['displayName'] != '') {
+      nam = true;
+    }
+    print(data);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -70,6 +85,8 @@ class _SignupPageState extends State<SignupPage> {
                               return "Invalid email";
                             }
                           },
+                          enabled: !ema,
+                          initialValue: ema ? data['email'] : null,
                           decoration: InputDecoration(
                               labelText: 'EMAIL',
                               labelStyle: TextStyle(
@@ -108,6 +125,8 @@ class _SignupPageState extends State<SignupPage> {
 
                         SizedBox(height: 10.0),
                         TextFormField(
+                          enabled: !nam,
+                          initialValue: nam ? data['displayName'] : null,
                           decoration: InputDecoration(
                               labelText: 'NAME ',
                               labelStyle: TextStyle(
@@ -119,6 +138,8 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         SizedBox(height: 10.0),
                         TextFormField(
+                          enabled: !phone,
+                          initialValue: phone ? data['num'] : null,
                           keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                           validator: (String value){
                             if(value.isEmpty){
@@ -304,6 +325,7 @@ class _SignupPageState extends State<SignupPage> {
       await storage.write(key: 'section', value: data['Section']);
       await storage.write(key: 'pic', value: data['photoUrl']);
       await storage.write(key: 'branch', value: data['Branch']);
+      await storage.write(key: 'logged', value: 'true');
       Navigator.pushReplacement(
           context,
           new MaterialPageRoute(
