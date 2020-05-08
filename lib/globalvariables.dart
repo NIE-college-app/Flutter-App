@@ -25,14 +25,14 @@ Color navcolors = Colors.white;
 String title = 'NIE';
 
 Map<String,dynamic> data={
-	"displayName":"Uttkarsh Singh",
-	"email":"randomain@mail.com",
-	"USN":"4NI19CS053",
-	'contact':"9412365372",
-	"Semester":"3",
-	"Branch":"CSE",
-	"Section":"B",
-	"photoUrl":"https://picsum.photos/250?image=9",
+	"displayName":"",
+	"email":"",
+	"USN":"",
+	'contact':"",
+	"Semester":"",
+	"Branch":"",
+	"Section":"",
+	"photoUrl":"",
 	"Groups":[
 		"CSE",
 		"Sem_3",
