@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:nie/globalvariables.dart';
 import 'login.dart';
 import 'main.dart';
@@ -10,14 +12,32 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
 
+  bool active;
+
   ScrollController _controller = ScrollController();
 
   String dropDownValue;
   String dropDownValueYear;
 
+  bool ema = false;
+  bool phone = false;
+  bool nam = false;
+
+
   @override
   void initState() {
     super.initState();
+    active = false;
+    if(data['email'] != '') {
+      ema = true;
+    }
+    if(data['num'] != '' && data['num'] != null) {
+      phone = true;
+    }
+    if(data['displayName'] != '') {
+      nam = true;
+    }
+    print(data);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -70,6 +90,8 @@ class _SignupPageState extends State<SignupPage> {
                               return "Invalid email";
                             }
                           },
+                          enabled: !ema,
+                          initialValue: ema ? data['email'] : null,
                           decoration: InputDecoration(
                               labelText: 'EMAIL',
                               labelStyle: TextStyle(
@@ -108,6 +130,8 @@ class _SignupPageState extends State<SignupPage> {
 
                         SizedBox(height: 10.0),
                         TextFormField(
+                          enabled: !nam,
+                          initialValue: nam ? data['displayName'] : null,
                           decoration: InputDecoration(
                               labelText: 'NAME ',
                               labelStyle: TextStyle(
@@ -119,6 +143,8 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         SizedBox(height: 10.0),
                         TextFormField(
+                          enabled: !phone,
+                          initialValue: phone ? data['num'] : null,
                           keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                           validator: (String value){
                             if(value.isEmpty){
@@ -257,30 +283,29 @@ class _SignupPageState extends State<SignupPage> {
                           ],
                         ),
                         SizedBox(height: 40.0),
-                        GestureDetector(
-                          onTap: () => submitData(),
-                          child: Container(
-                              height: 40.0,
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.blueGrey,
-                                color: AppColor,
-                                elevation: 3.0,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    submitData();
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'RESGISTER',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Montserrat'),
-                                    ),
-                                  ),
-                                ),
-                              )),
+                        ProgressButton(
+                          defaultWidget: Center(
+                            child: Text(
+                              'REGISTER',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                          ),
+                          color: active ? Colors.transparent : AppColor,
+                          borderRadius: 50,
+                          progressWidget: CupertinoActivityIndicator(),
+                          width: MediaQuery.of(context).size.width,
+                          onPressed: () async {
+                            setState(() {
+                              active = true;
+                            });
+                            await Future.delayed(Duration(seconds: 1), submitData());
+                            setState(() {
+                              active = false;
+                            });
+                          },
                         ),
                         SizedBox(height: 30,)
                       ],
@@ -304,11 +329,14 @@ class _SignupPageState extends State<SignupPage> {
       await storage.write(key: 'section', value: data['Section']);
       await storage.write(key: 'pic', value: data['photoUrl']);
       await storage.write(key: 'branch', value: data['Branch']);
-      Navigator.pushReplacement(
-          context,
-          new MaterialPageRoute(
-              builder: (BuildContext context) => Login())
-      );
+      await storage.write(key: 'logged', value: 'true');
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => Login())
+        );
+      });
     }
   }
 }

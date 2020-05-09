@@ -41,6 +41,8 @@ dependencies:
   webview_flutter: ^0.3.21
   splashscreen: ^1.2.0
   liquid_pull_to_refresh: ^1.2.0
+  flutter_staggered_grid_view: ^0.3.0
+  flutter_progress_button: '^0.6.4'
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +83,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -65,7 +65,7 @@ class _AllfeedState extends State<Allfeed> {
 													"Feed",
 													style: TextStyle(
 														fontSize: 70.0,
-														fontWeight: FontWeight.w200
+														fontWeight: FontWeight.w100
 													),
 												),
 												Padding(

@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class ProfData{
   final String name;
@@ -67,9 +70,14 @@ class ProfilePage extends StatelessWidget {
 				child: Column(
 					crossAxisAlignment: CrossAxisAlignment.start,
 					children: <Widget>[
-						Text("Name"),
+						Text("Name", style: _style()),
 						SizedBox(height: 4,),
-						Text(args.name, style: _style(),),
+						Text(args.name,),
+						SizedBox(height: 16,),
+
+						Text("Department", style: _style()),
+						SizedBox(height: 4,),
+						Text(args.data['dept'],),
 						SizedBox(height: 16,),
 
 						Text("Email", style: _style(),),
@@ -171,7 +179,6 @@ final String url = "http://chuteirafc.cartacapital.com.br/wp-content/uploads/201
 class CustomAppBar extends StatelessWidget
     with PreferredSizeWidget{
 
-
   final Widget call = SvgPicture.asset(
     'assets/svg/icons8-phone.svg',
     height: 20,
@@ -213,13 +220,6 @@ class CustomAppBar extends StatelessWidget
                     },
                   ),
 
-
-                  IconButton(
-                    icon: Icon(Icons.info_outline, color: Colors.white,),
-                    onPressed: (){
-                      launch(args.data['Read More']);
-                    },
-                  )
                 ],
               ),
 
@@ -310,6 +310,7 @@ class MyClipper extends CustomClipper<Path>{
     p.lineTo(size.width, 0);
 
     p.close();
+
 
     return p;
   }
