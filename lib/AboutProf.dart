@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
+import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class ProfData{
   final String name;
@@ -67,9 +71,14 @@ class ProfilePage extends StatelessWidget {
 				child: Column(
 					crossAxisAlignment: CrossAxisAlignment.start,
 					children: <Widget>[
-						Text("Name"),
+						Text("Name", style: _style()),
 						SizedBox(height: 4,),
-						Text(args.name, style: _style(),),
+						Text(args.name,),
+						SizedBox(height: 16,),
+
+						Text("Department", style: _style()),
+						SizedBox(height: 4,),
+						Text(args.data['dept'],),
 						SizedBox(height: 16,),
 
 						Text("Email", style: _style(),),
@@ -172,6 +181,27 @@ class CustomAppBar extends StatelessWidget
     with PreferredSizeWidget{
 
 
+	void addCon(args) async {
+//		http.Response response = await http.get(
+//			args.data['photoUrl'],
+//		);
+//		Uint8List avatar = response.bodyBytes;
+		Contact contact = new Contact(
+//			avatar: avatar,
+			displayName: args.name.split(' ')[0].toString(),
+			familyName: args.name.split(' ')[1].toString(),
+			company: "The National Institute of Engineering",
+			jobTitle: args.data['dept'],
+			emails: [
+				args.data['email'],
+			],
+			phones: [
+				args.data['num']
+			],
+		);
+		await ContactsService.addContact(contact);
+	}
+
   final Widget call = SvgPicture.asset(
     'assets/svg/icons8-phone.svg',
     height: 20,
@@ -213,13 +243,6 @@ class CustomAppBar extends StatelessWidget
                     },
                   ),
 
-
-                  IconButton(
-                    icon: Icon(Icons.info_outline, color: Colors.white,),
-                    onPressed: (){
-                      launch(args.data['Read More']);
-                    },
-                  )
                 ],
               ),
 
@@ -311,6 +334,7 @@ class MyClipper extends CustomClipper<Path>{
 
     p.close();
 
+    
     return p;
   }
 

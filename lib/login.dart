@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
 			}
 			else if(index == 4){
 				body = MyHomePage();
-				title = "Your posts";
+				title = "Group Profile";
 			}
 		});
 		_pageController.animateToPage(

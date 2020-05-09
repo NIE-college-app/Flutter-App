@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nie/globalvariables.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class pdfView extends StatefulWidget {
@@ -17,6 +18,8 @@ class _pdfViewState extends State<pdfView> {
     return Scaffold(
 		appBar: AppBar(
 			title: Text('Syllabus'),
+			elevation: 0,
+			backgroundColor: AppColor,
 		),
 		body: WebView(
 			initialUrl: "http://www.nie.ac.in/wp-content/uploads/2015/05/I-Sc-Engg.-III-year-2019-20.pdf",
