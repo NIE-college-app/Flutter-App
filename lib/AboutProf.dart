@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -180,28 +179,6 @@ final String url = "http://chuteirafc.cartacapital.com.br/wp-content/uploads/201
 class CustomAppBar extends StatelessWidget
     with PreferredSizeWidget{
 
-
-	void addCon(args) async {
-//		http.Response response = await http.get(
-//			args.data['photoUrl'],
-//		);
-//		Uint8List avatar = response.bodyBytes;
-		Contact contact = new Contact(
-//			avatar: avatar,
-			displayName: args.name.split(' ')[0].toString(),
-			familyName: args.name.split(' ')[1].toString(),
-			company: "The National Institute of Engineering",
-			jobTitle: args.data['dept'],
-			emails: [
-				args.data['email'],
-			],
-			phones: [
-				args.data['num']
-			],
-		);
-		await ContactsService.addContact(contact);
-	}
-
   final Widget call = SvgPicture.asset(
     'assets/svg/icons8-phone.svg',
     height: 20,
@@ -334,7 +311,7 @@ class MyClipper extends CustomClipper<Path>{
 
     p.close();
 
-    
+
     return p;
   }
 
