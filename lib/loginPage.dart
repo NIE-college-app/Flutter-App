@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/main.dart';
 import 'package:nie/services/auth.dart';
@@ -14,6 +15,17 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
+
+	bool active;
+
+	@override
+  void initState() {
+    super.initState();
+    setState(() {
+    	active = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,28 +101,32 @@ class _loginPageState extends State<loginPage> {
 								),
 							),
 							SizedBox(height: 40.0),
-							Container(
-								height: 40.0,
-								child: Material(
-									borderRadius: BorderRadius.circular(20.0),
-									shadowColor: Colors.deepPurpleAccent,
-									color: AppColor,
-									elevation: 7.0,
-									child: GestureDetector(
-										onTap: () {
-											Navigator.of(context).pushNamed('/Register');
-										},
-										child: Center(
-											child: Text(
-												'LOGIN',
-												style: TextStyle(
-													color: Colors.white,
-													fontWeight: FontWeight.bold,
-													fontFamily: 'Montserrat'),
-											),
-										),
+							ProgressButton(
+								defaultWidget: Center(
+									child: Text(
+										'LOGIN',
+										style: TextStyle(
+											color: Colors.white,
+											fontWeight: FontWeight.bold,
+											fontFamily: 'Montserrat'),
 									),
 								),
+								color: active ? Colors.transparent : AppColor,
+								borderRadius: 50,
+								progressWidget: CupertinoActivityIndicator(),
+								width: MediaQuery.of(context).size.width,
+								onPressed: () async {
+									setState(() {
+										active = true;
+									});
+									int score = await Future.delayed(Duration(seconds: 3), () {
+										print('Logged in with Email and Password');
+									});
+									print(score);
+									setState(() {
+									  active = false;
+									});
+								},
 							),
 							SizedBox(height: 20.0),
 							GestureDetector(
@@ -182,3 +198,26 @@ class _loginPageState extends State<loginPage> {
 
 
 
+// Container(
+//								height: 40.0,
+//								child: Material(
+//									borderRadius: BorderRadius.circular(20.0),
+//									shadowColor: Colors.deepPurpleAccent,
+//									color: AppColor,
+//									elevation: 7.0,
+//									child: GestureDetector(
+//										onTap: () {
+//											Navigator.of(context).pushNamed('/Register');
+//										},
+//										child: Center(
+//											child: Text(
+//												'LOGIN',
+//												style: TextStyle(
+//													color: Colors.white,
+//													fontWeight: FontWeight.bold,
+//													fontFamily: 'Montserrat'),
+//											),
+//										),
+//									),
+//								),
+//							)

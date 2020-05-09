@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:nie/globalvariables.dart';
 import 'login.dart';
 import 'main.dart';
@@ -9,6 +11,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+
+  bool active;
 
   ScrollController _controller = ScrollController();
 
@@ -23,6 +27,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void initState() {
     super.initState();
+    active = false;
     if(data['email'] != '') {
       ema = true;
     }
@@ -278,30 +283,29 @@ class _SignupPageState extends State<SignupPage> {
                           ],
                         ),
                         SizedBox(height: 40.0),
-                        GestureDetector(
-                          onTap: () => submitData(),
-                          child: Container(
-                              height: 40.0,
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.blueGrey,
-                                color: AppColor,
-                                elevation: 3.0,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    submitData();
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'RESGISTER',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Montserrat'),
-                                    ),
-                                  ),
-                                ),
-                              )),
+                        ProgressButton(
+                          defaultWidget: Center(
+                            child: Text(
+                              'REGISTER',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                          ),
+                          color: active ? Colors.transparent : AppColor,
+                          borderRadius: 50,
+                          progressWidget: CupertinoActivityIndicator(),
+                          width: MediaQuery.of(context).size.width,
+                          onPressed: () async {
+                            setState(() {
+                              active = true;
+                            });
+                            await Future.delayed(Duration(seconds: 1), submitData());
+                            setState(() {
+                              active = false;
+                            });
+                          },
                         ),
                         SizedBox(height: 30,)
                       ],
@@ -326,11 +330,13 @@ class _SignupPageState extends State<SignupPage> {
       await storage.write(key: 'pic', value: data['photoUrl']);
       await storage.write(key: 'branch', value: data['Branch']);
       await storage.write(key: 'logged', value: 'true');
-      Navigator.pushReplacement(
-          context,
-          new MaterialPageRoute(
-              builder: (BuildContext context) => Login())
-      );
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => Login())
+        );
+      });
     }
   }
 }

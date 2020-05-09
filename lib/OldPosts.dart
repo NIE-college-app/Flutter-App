@@ -73,23 +73,25 @@ class MyHomePage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(Icons.card_membership, color: Colors.white, size: 30,),
-                                    SizedBox(width: 4,),
-                                    Text("234", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700,
-                                        fontFamily: "Roboto", fontSize: 24
-                                    ),)
-                                  ],
-                                ),
-
-                                Text("Posts", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400,
-                                    fontFamily: "Roboto", fontSize: 20
-                                ),)
-                              ],
+                            GestureDetector(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.card_membership, color: Colors.white, size: 30,),
+                                      SizedBox(width: 4,),
+                                      Text("234", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700,
+                                          fontFamily: "Roboto", fontSize: 24
+                                      ),)
+                                    ],
+                                  ),
+                                  Text("Posts", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400,
+                                      fontFamily: "Roboto", fontSize: 20
+                                  ),)
+                                ],
+                              ),
+                              onTap: () => Navigator.of(context).pushNamed('/posts'),
                             ),
 
                             Column(
