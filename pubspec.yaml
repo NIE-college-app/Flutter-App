@@ -48,6 +48,9 @@ dependencies:
   vcard: any
   path_provider: ^1.6.8
   permission_handler: ^5.0.0+hotfix.5
+  line_awesome_flutter: ^1.0.1
+  flutter_screenutil: ^1.0.2
+  animated_theme_switcher: ^1.0.5
 
 dev_dependencies:
   flutter_test:
@@ -97,6 +100,16 @@ flutter:
           weight: 500
         - asset: assets/fonts/Roboto-Light.ttf
           weight: 300
+    - family: SFProText
+      fonts:
+        - asset: assets/fonts/SF-Pro-Text-Thin.otf
+          weight: 100
+        - asset: assets/fonts/SF-Pro-Text-Regular.otf
+          weight: 400
+        - asset: assets/fonts/SF-Pro-Text-Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Text-Bold.otf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:

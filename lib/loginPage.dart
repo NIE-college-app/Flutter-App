@@ -7,6 +7,7 @@ import 'package:nie/main.dart';
 import 'package:nie/services/auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:nie/login.dart';
+import 'package:nie/services/loader.dart';
 
 
 class loginPage extends StatefulWidget {
@@ -113,7 +114,7 @@ class _loginPageState extends State<loginPage> {
 								),
 								color: active ? Colors.white : AppColor,
 								borderRadius: 50,
-								progressWidget: CupertinoActivityIndicator(),
+								progressWidget: ColorLoader2(),
 								width: MediaQuery.of(context).size.width,
 								onPressed: () async {
 									setState(() {
@@ -158,7 +159,7 @@ class _loginPageState extends State<loginPage> {
 										),
 									),
 								),
-								progressWidget: CupertinoActivityIndicator(),
+								progressWidget: ColorLoader2(),
 								width: MediaQuery.of(context).size.width,
 								borderRadius: 50,
 								onPressed: () async {
