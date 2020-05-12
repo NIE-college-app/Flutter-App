@@ -111,7 +111,7 @@ class _loginPageState extends State<loginPage> {
 											fontFamily: 'Montserrat'),
 									),
 								),
-								color: active ? Colors.transparent : AppColor,
+								color: active ? Colors.white : AppColor,
 								borderRadius: 50,
 								progressWidget: CupertinoActivityIndicator(),
 								width: MediaQuery.of(context).size.width,
@@ -129,13 +129,8 @@ class _loginPageState extends State<loginPage> {
 								},
 							),
 							SizedBox(height: 20.0),
-							GestureDetector(
-								onTap: () {
-									handleSignIn().then((user) {
-										Navigator.of(context).pushNamed('/Register');
-									});
-								},
-								child: Container(
+							ProgressButton(
+								defaultWidget: Container(
 									height: 40.0,
 									color: Colors.transparent,
 									child: Container(
@@ -163,6 +158,14 @@ class _loginPageState extends State<loginPage> {
 										),
 									),
 								),
+								progressWidget: CupertinoActivityIndicator(),
+								width: MediaQuery.of(context).size.width,
+								borderRadius: 50,
+								onPressed: () async {
+									await handleSignIn();
+									Navigator.of(context).pushNamed('/Register');
+								},
+								color: Colors.white
 							)
 						],
 					)),

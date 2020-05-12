@@ -293,7 +293,7 @@ class _SignupPageState extends State<SignupPage> {
                                   fontFamily: 'Montserrat'),
                             ),
                           ),
-                          color: active ? Colors.transparent : AppColor,
+                          color: active ? Colors.white : AppColor,
                           borderRadius: 50,
                           progressWidget: CupertinoActivityIndicator(),
                           width: MediaQuery.of(context).size.width,
