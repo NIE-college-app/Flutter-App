@@ -33,7 +33,7 @@ class _ColfeedState extends State<Colfeed> {
 					crossAxisAlignment: CrossAxisAlignment.start,
 					children: <Widget>[
 						Padding(
-							padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+							padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
 							child: Column(
 								crossAxisAlignment: CrossAxisAlignment.start,
 								mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +80,7 @@ class _ColfeedState extends State<Colfeed> {
 											)
 										],
 									),
-
+									SizedBox(height: 30,),
 									VideoCard(),
 									FeedCard(),
 									FeedCard(),

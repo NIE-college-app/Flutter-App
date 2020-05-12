@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:nie/globalvariables.dart';
+import 'package:nie/services/loader.dart';
 import 'login.dart';
 import 'main.dart';
 import 'package:flutter/material.dart';
@@ -196,7 +197,7 @@ class _SignupPageState extends State<SignupPage> {
                               return "Enter a valid section";
                             }else{
                               setState(() {
-                                data['USN']=value;
+                                data['section']=value;
                               });
                               return null;
                             }
@@ -295,7 +296,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           color: active ? Colors.white : AppColor,
                           borderRadius: 50,
-                          progressWidget: CupertinoActivityIndicator(),
+                          progressWidget: ColorLoader2(),
                           width: MediaQuery.of(context).size.width,
                           onPressed: () async {
                             setState(() {
