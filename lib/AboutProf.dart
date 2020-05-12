@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:vcard/vcard.dart';
@@ -208,38 +208,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
 	@override
 	void initState() {
 		super.initState();
-		initPlatformState();
 	}
 
-	initPlatformState() async {
-		String platformVersion;
-		// Platform messages may fail, so we use a try/catch PlatformException.
-		try {
-			platformVersion = await SimplePermissions.platformVersion;
-		} on PlatformException {
-			platformVersion = 'Failed to get platform version.';
-		}
-		if (!mounted) return;
 
-		setState(() {
-			_platformVersion = platformVersion;
-		});
-	}
 
 	addconPer(String name, Map<String, dynamic> val) async {
-		await SimplePermissions.requestPermission(Permission.ReadContacts).then((val) {});
-		await SimplePermissions.requestPermission(Permission.WriteContacts).then((value) async {
-			if(Platform.isAndroid) {
-				if(await SimplePermissions.checkPermission(Permission.WriteContacts) && await SimplePermissions.checkPermission(Permission.ReadContacts)) {
-					addCon(name, val);
-				}
-			}
-			else {
-				if(await SimplePermissions.getPermissionStatus(Permission.WriteContacts) == PermissionStatus.authorized && await SimplePermissions.getPermissionStatus(Permission.ReadContacts) == PermissionStatus.authorized) {
-					addCon(name, val);
-				}
-			}
-		});
+		await Permission.contacts.request();
+
+		var serviceStatus = await Permission.contacts.status;
+
+		if (serviceStatus.isGranted) {
+			addCon(name, val);
+		}
 	}
 
 //	sharePer(String name, Map<String, dynamic> val) async {
