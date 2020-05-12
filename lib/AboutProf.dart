@@ -5,10 +5,13 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'package:vcard/vcard.dart';
 
 class ProfData{
   final String name;
@@ -239,6 +242,49 @@ class _CustomAppBarState extends State<CustomAppBar> {
 		});
 	}
 
+//	sharePer(String name, Map<String, dynamic> val) async {
+//		await SimplePermissions.requestPermission(Permission.ReadExternalStorage).then((val) {});
+//		await SimplePermissions.requestPermission(Permission.WriteExternalStorage).then((value) async {
+//			if(Platform.isAndroid) {
+//				if(await SimplePermissions.checkPermission(Permission.WriteExternalStorage) && await SimplePermissions.checkPermission(Permission.ReadExternalStorage)) {
+//					share(name, val);
+//				}
+//			}
+//			else {
+//				if(await SimplePermissions.getPermissionStatus(Permission.WriteExternalStorage) == PermissionStatus.authorized && await SimplePermissions.getPermissionStatus(Permission.ReadExternalStorage) == PermissionStatus.authorized) {
+//					share(name, val);
+//				}
+//			}
+//		});
+//	}
+
+
+	share(name, val) async {
+		var vCard = VCard();
+		vCard.firstName = name;
+		vCard.organization = 'The National Institute of Engineering';
+		vCard.jobTitle = val['dept'];
+		vCard.photo.attachFromUrl(val['photoUrl'], 'jpg');
+		vCard.workPhone = val['num'];
+		vCard.workEmail = val['email'];
+
+		vCard.saveToFile('/$name.vcf');
+
+		Directory directory;
+
+		if (Platform.isAndroid) {
+			directory = await getExternalStorageDirectory();
+		} else {
+			directory = await getApplicationDocumentsDirectory();
+		}
+
+		await FlutterShare.shareFile(
+			title: name,
+			text: "$name.vcf",
+			filePath: "${directory.path}$name.vcf"
+		);
+	}
+
 	addCon(String name, Map<String, dynamic> val) async {
 		Contact prof = Contact(
 			androidAccountName: name,
@@ -318,9 +364,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
 											Navigator.of(context).pop();
 										},
 									),
-									IconButton(
-										icon: Icon(Icons.add_circle_outline),
-										onPressed: () => addconPer(args.name, args.data),
+									Container(
+										child: Row(
+											children: <Widget>[
+												IconButton(
+													icon: Icon(Icons.share),
+													onPressed: () => share(args.name, args.data),
+												),
+												IconButton(
+													icon: Icon(Icons.person_add),
+													onPressed: () => addconPer(args.name, args.data),
+												)
+											],
+										),
 									)
 
 								],

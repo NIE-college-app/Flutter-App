@@ -251,9 +251,9 @@ class _LoginState extends State<Login> {
 			items: <Widget>[
 				Icon(Icons.school, size: 30, color: AccentColor,),
 				Icon(Icons.group, size: 30, color: AccentColor),
-				Icon(Icons.line_style, size: 30, color: AccentColor),
+				Icon(CupertinoIcons.profile_circled, size: 30, color: AccentColor),
 				Icon(CupertinoIcons.pencil,size:30,color: AccentColor,),
-				Icon(CupertinoIcons.profile_circled,size:30,color: AccentColor,)
+				Icon(CupertinoIcons.group_solid,size:30,color: AccentColor,)
 			],
 			onTap: (index) => nav(index),
 			animationCurve: Curves.fastLinearToSlowEaseIn,
