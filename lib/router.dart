@@ -18,7 +18,7 @@ Map<String, Widget Function(BuildContext)> Router() {
 		'/imageUpload': (_) => ImageUplaod(),
 		'/contacts': (_) =>  Contacts(),
 		'/aboutProf': (_) => ProfilePage(),
-		'/aboutPost':(_)=>AboutPost(),
+		'/aboutPost':(_)=>ViewPostScreen(),
 		'/Register':(_)=>SignupPage(),
 		'/App':(_)=>App(),
 		'/pdfView': (_) => pdfView(),
