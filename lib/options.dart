@@ -93,7 +93,7 @@ class Options extends StatelessWidget {
       body: Column(
         children: <Widget>[
           header,
-          SizedBox(height: 50,),
+          SizedBox(height: MediaQuery.of(context).size.height*0.02,),
           Expanded(
             child: ListView(
               children: <Widget>[

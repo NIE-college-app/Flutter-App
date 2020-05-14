@@ -2,21 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:nie/OldPosts.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/loginPage.dart';
 import 'package:nie/post.dart';
 import 'package:nie/services/auth.dart';
 import 'package:nie/services/loader.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
 import 'package:nie/Weather.dart';
-import 'package:getflutter/getflutter.dart';
-import 'main.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -262,7 +257,7 @@ class _LoginState extends State<Login> {
 							mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 							children: <Widget>[
 								Text(
-									"Laura, are you sure you want to sign out?",
+									"${data['displayName']}, are you sure you want to sign out?",
 									textAlign: TextAlign.center,
 									style: TextStyle(
 										color: Colors.white,
