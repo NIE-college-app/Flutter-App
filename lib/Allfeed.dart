@@ -13,6 +13,14 @@ class Allfeed extends StatefulWidget {
   _AllfeedState createState() => _AllfeedState();
 }
 
+List<Map<String, String>> comments = [
+	{
+		'authorName': 'Iresh Sharma',
+		'authorImageUrl': data['photoUrl'],
+		'text': 'HI this is awesome'
+	}
+];
+
 class _AllfeedState extends State<Allfeed> {
 
 	final List<String> imageList = [
@@ -121,10 +129,7 @@ class _AllfeedState extends State<Allfeed> {
 															),
 															onTap: () {
 																Navigator.of(context).pushNamed(''
-																	'/aboutPost',
-																	arguments: PostData(
-																		data
-																	));
+																	'/aboutPost');
 															},
 														);
 													},
@@ -138,20 +143,17 @@ class _AllfeedState extends State<Allfeed> {
 										],
 									)
 								),
-								FeedCard(),
-								Divider(
-									thickness: 1,
-									height: 3,
-								),
-								FeedCard(),
-								Divider(
-									thickness: 1,
-								),
-								FeedCard(),
-								Divider(
-									thickness: 1,
-								),
-								FeedCard()
+								Container(
+									padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+									child: Column(
+										children: <Widget>[
+											FeedCard(),
+											FeedCard(),
+											FeedCard(),
+											FeedCard()
+										],
+									),
+								)
 							],
 						)
 					),

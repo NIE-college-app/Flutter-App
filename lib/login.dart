@@ -1,21 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:nie/OldPosts.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/loginPage.dart';
 import 'package:nie/post.dart';
 import 'package:nie/services/auth.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:nie/services/loader.dart';
 import 'Colfeed.dart';
 import 'Allfeed.dart';
 import 'options.dart';
 import 'package:nie/Weather.dart';
-import 'package:getflutter/getflutter.dart';
-import 'main.dart';
-
 
 class Login extends StatefulWidget {
   @override
@@ -106,131 +102,115 @@ class _LoginState extends State<Login> {
 		),
 
 		backgroundColor: Colors.white,
-		drawer:
-		GFDrawer(
-			child: ListView(
-				padding: EdgeInsets.zero,
-				children: <Widget>[
-					GFDrawerHeader(
-						child: Row(
-							mainAxisAlignment: MainAxisAlignment.start,
-							crossAxisAlignment: CrossAxisAlignment.center,
-							children: <Widget>[
-								GFAvatar(
-									radius: 50.0,
-									backgroundImage: NetworkImage(data['photoUrl']),
-								),
-								Padding(
-									padding: EdgeInsets.all(5),
-									child: Column(
-										crossAxisAlignment: CrossAxisAlignment.start,
-										children: <Widget>[
-											Text(
-												data['displayName'],
-												textAlign: TextAlign.left,
-											),
-											Text(
-												data['email'],
-												textAlign: TextAlign.left,
-											),
-										],
-									),
-								)
-							],
-						),
-					),
-					Column(
+		drawer: ClipPath(
+			clipper: _DrawerClipper(),
+			child: Drawer(
+				child: Padding(
+					padding: EdgeInsets.only(left: 10),
+					child: Column(
+						mainAxisSize: MainAxisSize.max,
 						mainAxisAlignment: MainAxisAlignment.spaceBetween,
+						crossAxisAlignment: CrossAxisAlignment.start,
 						children: <Widget>[
 							Container(
-								height: MediaQuery.of(context).size.height*0.6,
 								child: Column(
+									crossAxisAlignment: CrossAxisAlignment.start,
 									children: <Widget>[
+										SizedBox(height: 80,),
+										CircleAvatar(
+											radius: 60,
+											backgroundImage: NetworkImage(data['photoUrl']),
+										),
+										SizedBox(height: 20,),
+										Text(data['displayName'], style: TextStyle(
+											fontWeight: FontWeight.w600,
+											fontSize: 20
+										),),
+										SizedBox(height: 10,),
+										Divider(
+											thickness: 2,
+										),
+										SizedBox(height: 10,),
+										DrawerItem(
+											text: 'Notification',
+											icon: Icon(CupertinoIcons.bell),
+											onPressed: () {},
+										),
+										DrawerItem(
+											text: 'Reminders',
+											icon: Icon(CupertinoIcons.time),
+											onPressed: () {},
+										),
+										DrawerItem(
+											text: 'Developers',
+											icon: Icon(Icons.computer),
+											onPressed: () {},
+										),
 										Padding(
-											padding: EdgeInsets.all(5),
-											child: Row(
-												mainAxisAlignment: MainAxisAlignment.spaceBetween,
-												children: <Widget>[
-													Text('DND'),
-													CupertinoSwitch(
-														value: dnd,
-														onChanged: (value) {
-															setState(() {
-																dnd = value;
-															});
-														},
-													)
-												],
+											padding: EdgeInsets.only(left: 40),
+											child: DrawerItemSub(
+												text: 'Iresh Sharma',
+												onPressed: () {},
 											),
 										),
-										Divider(),
-										CupertinoButton(
-											child: Row(
-												mainAxisSize: MainAxisSize.max,
-												mainAxisAlignment: MainAxisAlignment.start,
-												children: <Widget>[
-													Padding(
-														padding: EdgeInsets.all(5),
-														child: Icon(
-															CupertinoIcons.bell,
-															color: Colors.grey[900],
-														),
-													),
-													Text(
-														'Notifications',
-														style: TextStyle(
-															color: Colors.grey[900]
-														),
-													)
-												],
+										Padding(
+											padding: EdgeInsets.only(left: 40),
+											child: DrawerItemSub(
+												text: 'Pranav B',
+												onPressed: () {},
 											),
-											onPressed: () => print('pressed'),
-										)
+										),
 									],
 								),
 							),
 							Container(
-								child: Align(
-									alignment: FractionalOffset.bottomCenter,
+								child: FlatButton(
 									child: Column(
+										crossAxisAlignment: CrossAxisAlignment.start,
 										children: <Widget>[
-											SignInButton(
-												Buttons.Email,
-												text: 'Logout',
-												onPressed: () {
-													signOut();
-													setState((){
-														storage.write(key: 'login', value: 'false');
-													});
-													storage.deleteAll();
-													Future.delayed(Duration(milliseconds: 500), (){
-														Navigator.pushReplacement(context, MaterialPageRoute(
-															builder: (_) => loginPage()
-														));
-													});
-												}
+											RichText(
+												text: TextSpan(
+													children: [
+														TextSpan(
+															text: 'Not ${data['displayName']},\n',
+															style: TextStyle(
+																fontSize: 18,
+																fontWeight: FontWeight.w500,
+																color: Colors.black
+															)
+														),
+														TextSpan(
+															text: 'Sign Out',
+															style: TextStyle(
+																fontSize: 18,
+																fontWeight: FontWeight.w500,
+																color: Colors.blueAccent,
+																decoration: TextDecoration.underline,
+															)
+														),
+														TextSpan(
+															text: ' ?',
+															style: TextStyle(
+																fontSize: 18,
+																fontWeight: FontWeight.w500,
+																color: Colors.blueAccent
+															)
+														),
+													]
+												),
 											),
-											Text('Follow Developers on insta'),
-											Row(
-												mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-												children: <Widget>[
-													CupertinoButton(
-														child: Text('@iresharma.py'),
-														onPressed: () => launch('https://www.instagram.com/iresharma.py/'),
-													),
-													CupertinoButton(
-														child: Text('@blaze_2305'),
-														onPressed: () => launch('https://www.instagram.com/blaze_2305/'),
-													)
-												],
-											)
+											SizedBox(height: 60,)
 										],
 									),
+									onPressed: () {
+										Navigator.of(context).pop();
+										_openSignOutBottomSheet(context);
+									},
 								),
 							)
 						],
-					)
-				],
+					),
+				),
 			),
 		),
 		body: PageView(
@@ -251,9 +231,9 @@ class _LoginState extends State<Login> {
 			items: <Widget>[
 				Icon(Icons.school, size: 30, color: AccentColor,),
 				Icon(Icons.group, size: 30, color: AccentColor),
-				Icon(Icons.line_style, size: 30, color: AccentColor),
+				Icon(CupertinoIcons.profile_circled, size: 30, color: AccentColor),
 				Icon(CupertinoIcons.pencil,size:30,color: AccentColor,),
-				Icon(CupertinoIcons.profile_circled,size:30,color: AccentColor,)
+				Icon(CupertinoIcons.group_solid,size:30,color: AccentColor,)
 			],
 			onTap: (index) => nav(index),
 			animationCurve: Curves.fastLinearToSlowEaseIn,
@@ -261,4 +241,191 @@ class _LoginState extends State<Login> {
 		),
 	);
   }
+
+  void _openSignOutBottomSheet(BuildContext context) {
+		showModalBottomSheet(
+			shape: BottomSheetShape(),
+			backgroundColor: AppColor,
+			context: context,
+			builder: (_) {
+				return Container(
+					padding: EdgeInsets.only(top: 24,left: 49, right: 48),
+					height: 200,
+					child: Center(
+						child: Column(
+							mainAxisSize: MainAxisSize.max,
+							mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+							children: <Widget>[
+								Text(
+									"${data['displayName']}, are you sure you want to sign out?",
+									textAlign: TextAlign.center,
+									style: TextStyle(
+										color: Colors.white,
+										fontSize: 20,
+										fontWeight: FontWeight.w600,
+									),
+								),
+								Row(
+									mainAxisAlignment: MainAxisAlignment.spaceBetween,
+									mainAxisSize: MainAxisSize.max,
+									children: <Widget>[
+										Expanded(
+											child: ProgressButton(
+												defaultWidget: Text(
+													"Sign out",
+													style: TextStyle(
+														color: AppColor,
+														fontSize: 16,
+														fontWeight: FontWeight.w600,
+													),
+												),
+												progressWidget: ColorLoader2(),
+												color: Colors.white,
+												onPressed: () async {
+													await signOut();
+													Future.delayed(Duration(milliseconds: 2000), () {
+														Navigator.of(context).pushReplacement(
+															new MaterialPageRoute(builder: (_) => loginPage())
+														);
+													});
+												},
+											)
+										),
+										SizedBox(
+											width: 20,
+										),
+										Expanded(
+											child: OutlineButton(
+												onPressed: () {
+													Navigator.of(context).pop();
+												},
+												borderSide: BorderSide(
+													color: Theme.of(context).scaffoldBackgroundColor,
+												),
+												color: Theme.of(context).primaryColor,
+												child: Text(
+													"Stay logged in",
+													style: TextStyle(
+														color: Theme.of(context).scaffoldBackgroundColor,
+														fontSize: 16,
+														fontWeight: FontWeight.w600,
+													),
+												),
+											),
+										),
+									],
+								),
+
+							],
+						),
+					),
+				);
+			}
+		);
+  }
+}
+
+class _DrawerClipper extends CustomClipper<Path> {
+	@override
+	Path getClip(Size size) {
+		Path path = Path();
+
+		path.moveTo(size.width - 50, 0);
+		path.quadraticBezierTo(size.width, size.height / 2, size.width  - 50, size.height);
+		path.lineTo(0, size.height);
+		path.lineTo(0, 0);
+		return path;
+	}
+
+	@override
+	bool shouldReclip(CustomClipper<Path> oldClipper) => true;
+}
+
+class DrawerItem extends StatelessWidget {
+
+	final String text;
+	final Function onPressed;
+	final Icon icon;
+
+  const DrawerItem({Key key, this.text, this.onPressed, this.icon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton.icon(
+		icon: icon,
+		label: Text(
+			text,
+			style: TextStyle(
+				fontWeight: FontWeight.w600,
+				fontSize: 18
+			),
+		),
+		onPressed: onPressed,
+	);
+  }
+}
+
+class DrawerItemSub extends StatelessWidget {
+
+	final String text;
+	final Function onPressed;
+
+	const DrawerItemSub({Key key, this.text, this.onPressed}) : super(key: key);
+
+	@override
+	Widget build(BuildContext context) {
+		return FlatButton(
+			child: Text(
+				text,
+				style: TextStyle(
+					fontWeight: FontWeight.w300,
+					fontSize: 18
+				),
+			),
+			onPressed: onPressed,
+		);
+	}
+}
+
+
+
+
+class BottomSheetShape extends ShapeBorder {
+	@override
+	// TODO: implement dimensions
+	EdgeInsetsGeometry get dimensions => throw UnimplementedError();
+
+	@override
+	Path getInnerPath(Rect rect, {TextDirection textDirection}) {
+		// TODO: implement getInnerPath
+		throw UnimplementedError();
+	}
+
+	@override
+	Path getOuterPath(Rect rect, {TextDirection textDirection}) {
+		return getClip(rect.size);
+	}
+
+	@override
+	void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {
+		// TODO: implement paint
+	}
+
+	@override
+	ShapeBorder scale(double t) {
+		// TODO: implement scale
+		throw UnimplementedError();
+	}
+
+	Path getClip(Size size) {
+		Path path = Path();
+
+		path.moveTo(0, 40);
+		path.quadraticBezierTo(size.width/2, 0, size.width, 40);
+		path.lineTo(size.width, size.height);
+		path.lineTo(0, size.height);
+
+		return path;
+	}
+
 }

@@ -1,234 +1,318 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:getflutter/getflutter.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:nie/loginPage.dart';
+import 'package:nie/services/auth.dart';
+import 'package:nie/services/loader.dart';
+
 import 'globalvariables.dart';
 
-class Options extends StatefulWidget {
-  @override
-  _OptionsState createState() => _OptionsState();
-}
-
-class _OptionsState extends State<Options> {
+class Options extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width, allowFontScaling: true);
 
-
-    return RefreshIndicator(
-      displacement: 30.0,
-      onRefresh: (){},
-      child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Container(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.height*0.05, 0, MediaQuery.of(context).size.height*0.07),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    var profileInfo = Expanded(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: kSpacingUnit.w * 10,
+            width: kSpacingUnit.w * 10,
+            margin: EdgeInsets.only(top: kSpacingUnit.w * 3),
+            child: Stack(
               children: <Widget>[
-                Card(
-                  elevation: 50,
-                  margin: EdgeInsets.all(6),
-
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      GFAccordion(
-                        titleChild: Container(
-                              height: 200,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.black,
-                                        width: 5.0
-                                      ),
-                                      borderRadius: BorderRadius.all(Radius.circular(1000))
-                              ),
-                                    child: GFAvatar(
-                                      backgroundImage: NetworkImage(data['photoUrl']),
-                                      radius: 70,
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Flexible(
-                                            child: Text(
-                                                data['displayName'].split(' ')[0],
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                              ),
-                                              overflow: TextOverflow.fade,
-                                              softWrap: true,
-                                            ),
-                                          ),
-                                          Flexible(
-                                            child: Text(
-                                              '\n'+data['USN'],
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                              overflow: TextOverflow.fade,
-                                              softWrap: true,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                  ),
-
-                                ],
-                              )
-                          ),
-                        contentChild: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              _Row("Name: "," ${data['displayName']}"),
-                              _Row("USN: "," ${data['USN']}"),
-                              _Row("Contact: "," ${data['contact']}"),
-                              _Row("Email: "," ${data['email']}"),
-                              _Row("Department: "," ${data['Branch']}"),
-                              _Row("Semester: "," ${data['Semester']}"),
-                              _Row("Section: "," ${data['Section']}"),
-                            ],
-                          ),
-                        ),
-                        collapsedIcon: Icon(
-                            CupertinoIcons.down_arrow,
-                            size: 30,
-                          color: AccentColor,
-                        ),
-                        expandedIcon: Icon(
-                          CupertinoIcons.up_arrow,
-                          size: 30,
-                            color: AccentColor,
-                        ),
-//                    collapsedTitlebackgroundColor: Theme.of(context).,
-//                    expandedTitlebackgroundColor: Colors.white,
-                      )
-                    ],
-                  ),
+                CircleAvatar(
+                  radius: kSpacingUnit.w * 5,
+                  backgroundImage: NetworkImage(data['photoUrl']),
                 ),
                 GestureDetector(
-                  onTap: ()=>Navigator.pushNamed(context,'/timetable'),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    elevation: 20,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GFListTile(
-                        titleText: "Time Table",
-                        subtitleText: "Check your time table",
-                        icon: Icon(
-                          Icons.calendar_today,
-                          color: AccentColor,
-                          size: 40,
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      height: kSpacingUnit.w * 2.5,
+                      width: kSpacingUnit.w * 2.5,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        heightFactor: kSpacingUnit.w * 1.5,
+                        widthFactor: kSpacingUnit.w * 1.5,
+                        child: Icon(
+                          CupertinoIcons.pen,
+                          color: kDarkPrimaryColor,
+                          size: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
                         ),
                       ),
                     ),
                   ),
+                  onTap: () {},
                 ),
-                GestureDetector(
-                  onTap: ()=> Navigator.of(context).pushNamed('/pdfView'),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    elevation: 20,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GFListTile(
-                        titleText: "Syllabus",
-                        subtitleText: "Check your syllabus",
-                        icon: Icon(
-                          Icons.import_contacts,
-                          color: AccentColor,
-                          size: 40,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: ()=>Navigator.pushNamed(context,'/contacts'),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    elevation: 20,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GFListTile(
-                        titleText: "Faculty Info",
-                        subtitleText: "Get to know about your faculty here",
-                        icon: Icon(
-                          Icons.perm_contact_calendar,
-                          color: AccentColor,
-                          size: 40,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
               ],
             ),
           ),
-	    ),
+          SizedBox(height: kSpacingUnit.w * 2),
+          Text(
+            data['displayName'],
+            style: kTitleTextStyle,
+          ),
+          SizedBox(height: kSpacingUnit.w * 0.5),
+          Text(
+            data['USN'],
+            style: kTitleTextStyle,
+          ),
+          SizedBox(height: kSpacingUnit.w * 0.25),
+          Text(
+            data['email'],
+            style: kCaptionTextStyle,
+          ),
+          SizedBox(height: kSpacingUnit.w * 2),
+
+        ],
       ),
     );
-  }
-}
 
+    var header = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(width: kSpacingUnit.w * 3),
+        Icon(
+          LineAwesomeIcons.arrow_left,
+          size: ScreenUtil().setSp(kSpacingUnit.w * 3),
+        ),
+        profileInfo,
+        SizedBox(width: kSpacingUnit.w * 3),
+      ],
+    );
 
-class _Row extends StatelessWidget {
-
-  final TextStyle _value_style = TextStyle(
-    color: Colors.pink,
-    fontWeight: FontWeight.w600,
-    fontSize: 17,
-    letterSpacing:1.2,
-    wordSpacing: 2,
-  );
-
-  final TextStyle _field_style = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.w900,
-    fontSize: 17,
-    letterSpacing:1.2,
-    wordSpacing: 2,
-  );
-
-  final String field;
-  final String value;
-
-  _Row(this.field,this.value);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
+    return Scaffold(
+      body: Column(
         children: <Widget>[
-          Text(
-            field,
-            style: _field_style,
-          ),
-          Flexible(
-            child: Text(
-              value,
-              style: _value_style,
+          header,
+          SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+          Expanded(
+            child: ListView(
+              children: <Widget>[
+                GestureDetector(
+                  child: ProfileListItem(
+                    icon: Icons.calendar_today,
+                    text: 'TimeTable',
+                    hasNavigation: true,
+                  ),
+                  onTap: () => Navigator.of(context).pushNamed('/timetable'),
+                ),
+                GestureDetector(
+                  child: ProfileListItem(
+                    icon: CupertinoIcons.person_add_solid,
+                    text: 'Faculty',
+                    hasNavigation: true,
+                  ),
+                  onTap: () => Navigator.of(context).pushNamed('/contacts'),
+                ),
+                GestureDetector(
+                  child: ProfileListItem(
+                    icon: Icons.import_contacts,
+                    text: 'Syllabus',
+                    hasNavigation: true,
+                  ),
+                  onTap: () => Navigator.of(context).pushNamed('/pdfView'),
+                ),
+                GestureDetector(
+                  child: ProfileListItem(
+                    icon: null,
+                    text: 'Logout',
+                    hasNavigation: false,
+                  ),
+                  onTap: () => _openSignOutBottomSheet(context),
+                )
+              ],
             ),
           )
         ],
       ),
     );
   }
+
+  void _openSignOutBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        shape: BottomSheetShape(),
+        backgroundColor: AppColor,
+        context: context,
+        builder: (_) {
+          return Container(
+            padding: EdgeInsets.only(top: 24,left: 49, right: 48),
+            height: 200,
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    "Laura, are you sure you want to sign out?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Expanded(
+                          child: ProgressButton(
+                            defaultWidget: Text(
+                              "Sign out",
+                              style: TextStyle(
+                                color: AppColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            progressWidget: ColorLoader2(),
+                            color: Colors.white,
+                            onPressed: () async {
+                              await signOut();
+                              Future.delayed(Duration(milliseconds: 2000), () {
+                                Navigator.of(context).pushReplacement(
+                                    new MaterialPageRoute(builder: (_) => loginPage())
+                                );
+                              });
+                            },
+                          )
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: OutlineButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          borderSide: BorderSide(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
+                          color: Theme.of(context).primaryColor,
+                          child: Text(
+                            "Stay logged in",
+                            style: TextStyle(
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
+}
+
+
+
+
+class ProfileListItem extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final bool hasNavigation;
+
+  const ProfileListItem({
+    Key key,
+    this.icon,
+    this.text,
+    this.hasNavigation = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: kSpacingUnit.w * 5.5,
+      margin: EdgeInsets.symmetric(
+        horizontal: kSpacingUnit.w * 4,
+      ).copyWith(
+        bottom: kSpacingUnit.w * 2,
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: kSpacingUnit.w * 2,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
+        color: Theme.of(context).backgroundColor,
+      ),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            this.icon,
+            size: kSpacingUnit.w * 2.5,
+          ),
+          SizedBox(width: kSpacingUnit.w * 1.5),
+          Text(
+            this.text,
+            style: kTitleTextStyle.copyWith(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Spacer(),
+          if (this.hasNavigation)
+            Icon(
+              CupertinoIcons.right_chevron,
+              size: kSpacingUnit.w * 2.5,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class BottomSheetShape extends ShapeBorder {
+  @override
+  // TODO: implement dimensions
+  EdgeInsetsGeometry get dimensions => throw UnimplementedError();
+
+  @override
+  Path getInnerPath(Rect rect, {TextDirection textDirection}) {
+    // TODO: implement getInnerPath
+    throw UnimplementedError();
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
+    return getClip(rect.size);
+  }
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {
+    // TODO: implement paint
+  }
+
+  @override
+  ShapeBorder scale(double t) {
+    // TODO: implement scale
+    throw UnimplementedError();
+  }
+
+  Path getClip(Size size) {
+    Path path = Path();
+
+    path.moveTo(0, 40);
+    path.quadraticBezierTo(size.width/2, 0, size.width, 40);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    return path;
+  }
+
 }

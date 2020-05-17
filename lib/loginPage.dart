@@ -7,6 +7,7 @@ import 'package:nie/main.dart';
 import 'package:nie/services/auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:nie/login.dart';
+import 'package:nie/services/loader.dart';
 
 
 class loginPage extends StatefulWidget {
@@ -111,9 +112,9 @@ class _loginPageState extends State<loginPage> {
 											fontFamily: 'Montserrat'),
 									),
 								),
-								color: active ? Colors.transparent : AppColor,
+								color: active ? Colors.white : AppColor,
 								borderRadius: 50,
-								progressWidget: CupertinoActivityIndicator(),
+								progressWidget: ColorLoader2(),
 								width: MediaQuery.of(context).size.width,
 								onPressed: () async {
 									setState(() {
@@ -129,13 +130,8 @@ class _loginPageState extends State<loginPage> {
 								},
 							),
 							SizedBox(height: 20.0),
-							GestureDetector(
-								onTap: () {
-									handleSignIn().then((user) {
-										Navigator.of(context).pushNamed('/Register');
-									});
-								},
-								child: Container(
+							ProgressButton(
+								defaultWidget: Container(
 									height: 40.0,
 									color: Colors.transparent,
 									child: Container(
@@ -163,6 +159,14 @@ class _loginPageState extends State<loginPage> {
 										),
 									),
 								),
+								progressWidget: ColorLoader2(),
+								width: MediaQuery.of(context).size.width,
+								borderRadius: 50,
+								onPressed: () async {
+									await handleSignIn();
+									Navigator.of(context).pushNamed('/Register');
+								},
+								color: Colors.white
 							)
 						],
 					)),
