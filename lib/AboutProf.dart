@@ -179,10 +179,6 @@ class _ProfilePageState extends State<ProfilePage> {
 								Divider(color: Colors.grey,)
 							],
 						),
-						SizedBox(height: 16,),
-						Divider(color: Colors.grey,)
-					],
-				),
 			);
 		  },
 	  ),

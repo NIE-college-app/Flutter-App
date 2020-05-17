@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:nie/globalvariables.dart';
 import 'package:nie/services/loader.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+
 import 'login.dart';
 import 'main.dart';
-import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -24,6 +29,7 @@ class _SignupPageState extends State<SignupPage> {
   bool phone = false;
   bool nam = false;
 
+  Map<String,dynamic> userData = {};
 
   @override
   void initState() {
@@ -31,12 +37,16 @@ class _SignupPageState extends State<SignupPage> {
     active = false;
     if(data['email'] != '') {
       ema = true;
+      userData['email']=data['email'];
     }
     if(data['num'] != '' && data['num'] != null) {
       phone = true;
     }
     if(data['displayName'] != '') {
       nam = true;
+      setState(() {
+        userData['displayName']=data['displayName'];
+      });
     }
     print(data);
   }
@@ -88,6 +98,10 @@ class _SignupPageState extends State<SignupPage> {
                             if(RegExp(regex).hasMatch(value)){
                               return null;
                             }else{
+                              setState(() {
+                                userData['email']=value.trim();
+                                data['email']=value.trim();
+                              });
                               return "Invalid email";
                             }
                           },
@@ -108,12 +122,12 @@ class _SignupPageState extends State<SignupPage> {
                         TextFormField(
                           validator: (String value){
                             if(value.isEmpty){
-                              return "Enter a valid name";
+                              return "Enter a password";
                             }else if(value.length<=6){
                               return "Password must be longer than 6 characters";
                             }else{
                               setState(() {
-                                data['name']=value;
+                                userData['password']=value.trim();
                               });
                               return null;
                             }
@@ -133,6 +147,17 @@ class _SignupPageState extends State<SignupPage> {
                         TextFormField(
                           enabled: !nam,
                           initialValue: nam ? data['displayName'] : null,
+                          validator: (String value){
+                            if(value.isEmpty){
+                              return "Please Enter your Name";
+                            }else{
+                              setState(() {
+                                userData['displayName']=value;
+                                data['displayName']=value;
+                              });
+                              return null;
+                            }
+                          },
                           decoration: InputDecoration(
                               labelText: 'NAME ',
                               labelStyle: TextStyle(
@@ -156,6 +181,7 @@ class _SignupPageState extends State<SignupPage> {
                             else{
                               setState(() {
                                 data['contact']=value;
+                                userData['contact']=value;
                               });
                               return null;
                             }
@@ -177,6 +203,7 @@ class _SignupPageState extends State<SignupPage> {
                             }else{
                               setState(() {
                                 data['USN']=value;
+                                userData['USN']=value;
                               });
                               return null;
                             }
@@ -198,6 +225,7 @@ class _SignupPageState extends State<SignupPage> {
                             }else{
                               setState(() {
                                 data['section']=value;
+                                userData['section']=value;
                               });
                               return null;
                             }
@@ -224,6 +252,7 @@ class _SignupPageState extends State<SignupPage> {
                                     return "Choose one option";
                                   }else{
                                     setState(() {
+                                      userData['Department']=value;
                                       data['Department']=value;
                                     });
                                     return null;
@@ -256,6 +285,7 @@ class _SignupPageState extends State<SignupPage> {
                                     return "Choose one option";
                                   }else{
                                     setState(() {
+                                      userData['Semester']=value;
                                       data['Semester']=value;
                                     });
                                     return null;
@@ -298,15 +328,18 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: 50,
                           progressWidget: ColorLoader2(),
                           width: MediaQuery.of(context).size.width,
-                          onPressed: () async {
+                          onPressed: ()async{
                             setState(() {
                               active = true;
                             });
-                            await Future.delayed(Duration(seconds: 1), submitData());
+                            var vresp = await Future.delayed(Duration(seconds: 1), submitData());
                             setState(() {
                               active = false;
                             });
-                          },
+                          }
+//                            () async {
+
+//                          },
                         ),
                         SizedBox(height: 30,)
                       ],
@@ -321,6 +354,13 @@ class _SignupPageState extends State<SignupPage> {
 
   submitData()async{
     if(_formKey.currentState.validate()){
+      http.get("http://10.0.2.2:5000/ping").then((value){
+        print(value);
+      });
+      print(userData);
+    }
+
+    if(_formKey.currentState.validate()){
       debugPrint("valid");
       await storage.write(key: 'email', value: data['email']);
       await storage.write(key: 'name', value: data['displayName']);
@@ -331,6 +371,9 @@ class _SignupPageState extends State<SignupPage> {
       await storage.write(key: 'pic', value: data['photoUrl']);
       await storage.write(key: 'branch', value: data['Branch']);
       await storage.write(key: 'logged', value: 'true');
+     final Map<String,dynamic> response = await sendData(userData);
+     print(response);
+     await storage.write(key: "uid",value: response['uid'].toString());
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pushReplacement(
             context,
@@ -339,5 +382,15 @@ class _SignupPageState extends State<SignupPage> {
         );
       });
     }
+  }
+  Future<Map<String,dynamic>> sendData(Map<String,dynamic> data) async {
+    final http.Response response = await http.post(
+      'http://10.0.2.2:5000/api/users',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
+    return json.decode(response.body);
   }
 }

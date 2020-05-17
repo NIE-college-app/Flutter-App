@@ -36,6 +36,7 @@ Future<FirebaseUser> handleSignIn() async {
 
 Future<void> signOut() async{
 	await FirebaseAuth.instance.signOut();
+	await storage.deleteAll();
 	await storage.write(key: 'logged', value: 'false');
 	loginStatus = 'false';
 	FirebaseAuth.instance.signOut();
