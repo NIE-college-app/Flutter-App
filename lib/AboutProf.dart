@@ -162,7 +162,6 @@ class ProfilePage extends StatelessWidget {
 							},
 						),
 						SizedBox(height: 16,),
-
 						Divider(color: Colors.grey,)
 					],
 				),
